@@ -83,7 +83,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Contoh: PTSP-K8J29A atau token UUID"
-              className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-[#0e172a] border border-slate-200 dark:border-[#1e3052] rounded-2xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:border-[#005599] focus:bg-white dark:focus:bg-[#10192d] focus:ring-4 focus:ring-blue-100/50 dark:focus:ring-blue-900/30 transition uppercase tracking-wider"
+              className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-[#0e172a] border border-slate-200 dark:border-[#1e3052] rounded-2xl text-base sm:text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:border-[#005599] focus:bg-white dark:focus:bg-[#10192d] focus:ring-4 focus:ring-blue-100/50 dark:focus:ring-blue-900/30 transition uppercase tracking-wider"
             />
           </div>
           <button

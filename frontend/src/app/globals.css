@@ -48,7 +48,84 @@ input, button, select, textarea {
   font-family: 'Poppins' !important;
 }
 
-/* Hide scrollbar completely for clean mobile view */
+/* =========================================================
+   DESKTOP SCROLLBAR (min-width: 1024px) - Tampil di desktop saja
+========================================================= */
+@media (min-width: 1024px) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 85, 153, 0.3) transparent;
+  }
+
+  .dark * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(77, 166, 255, 0.4) transparent;
+  }
+
+  /* WebKit Desktop Scrollbars */
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 85, 153, 0.25);
+    border-radius: 9999px;
+    transition: background 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #005599;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(77, 166, 255, 0.3);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #4da6ff;
+  }
+}
+
+/* =========================================================
+   MOBILE SCROLLBAR (max-width: 1023.98px) - Sembunyikan icon scrollbar di mobile
+========================================================= */
+@media (max-width: 1023.98px) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+  }
+}
+
+/* Utility to explicitly hide scrollbar anywhere */
 .no-scrollbar::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;
@@ -56,8 +133,8 @@ input, button, select, textarea {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none !important; /* IE and Edge */
-  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 /* Custom Minimalist Clean Underline Inputs */
@@ -220,16 +297,32 @@ input[type="date"] {
   box-sizing: border-box;
 }
 
-/* iOS Safari auto-zoom prevention: keep input font-size >= 16px */
+/* =========================================================
+   PREVENT AUTO-ZOOM ON MOBILE INPUT FOCUS
+   Mobile browsers (Safari iOS, Chrome, etc.) auto-zoom if font-size < 16px
+========================================================= */
+@media (max-width: 1023.98px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]),
+  select,
+  textarea,
+  .ptsp-input,
+  .ptsp-textarea {
+    font-size: 16px !important;
+  }
+}
+
 @supports (-webkit-touch-callout: none) {
-  @media (max-width: 1023.98px) {
-    .ptsp-input,
-    .ptsp-textarea,
-    input,
-    select,
-    textarea {
-      font-size: 16px !important;
-    }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]),
+  select,
+  textarea,
+  .ptsp-input,
+  .ptsp-textarea {
+    font-size: 16px !important;
+  }
+
+  input[type="password"] {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    letter-spacing: 0.06em;
   }
 }
 
