@@ -1,0 +1,39 @@
+services:
+  # ── 1. Backend REST API (NestJS) ─────────────────────────────────────────────
+  ptsp-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ptsp-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=3002
+      - NODE_ENV=production
+    ports:
+      - "3002:3002"
+    networks:
+      - ptsp-network
+
+  # ── 2. Frontend Application (Next.js) ────────────────────────────────────────
+  ptsp-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ptsp-frontend
+    restart: unless-stopped
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:3002
+    ports:
+      - "3001:3001"
+    depends_on:
+      - ptsp-backend
+    networks:
+      - ptsp-network
+
+networks:
+  ptsp-network:
+    driver: bridge

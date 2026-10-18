@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --ptsp-primary: #6320ee;
+  --ptsp-primary-hover: #5218cb;
+  --ptsp-secondary: #3083ff;
+  --ptsp-bg-sidebar: #5d1be8;
+  --ptsp-sidebar-gradient: linear-gradient(180deg, #6c22f5 0%, #5013ca 100%);
+  --ptsp-accent-pink: #ec4899;
+  --ptsp-accent-emerald: #10b981;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f6f8fc;
+  color: #1e293b;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Character counter styling */
+.char-counter {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+}
+
+/* Custom Minimalist Clean Underline Inputs matching screenshots */
+.ptsp-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid #e2e8f0;
+  padding: 0.5rem 0.25rem;
+  font-size: 0.925rem;
+  color: #1e293b;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.ptsp-input:focus {
+  border-bottom-color: #6320ee;
+  box-shadow: 0 1px 0 0 #6320ee;
+}
+
+.ptsp-input::placeholder {
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+/* Custom Textarea */
+.ptsp-textarea {
+  width: 100%;
+  background: #fafbfe;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  font-size: 0.925rem;
+  color: #1e293b;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  resize: vertical;
+}
+
+.ptsp-textarea:focus {
+  border-color: #6320ee;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(99, 32, 238, 0.1);
+}
+
+/* Mascot floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-mascot-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Eye blink animation */
+@keyframes blink {
+  0%, 90%, 100% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0.1;
+  }
+}
+
+.animate-blink {
+  animation: blink 3.5s infinite;
+}
