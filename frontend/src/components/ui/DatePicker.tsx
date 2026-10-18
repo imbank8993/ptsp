@@ -328,12 +328,12 @@ export default function DatePicker({
                 <span className="dpk-range-hint">
                   {isPickingEnd ? (
                     <span className="inline-flex items-center gap-1">
-                      <MousePointer className="w-3.5 h-3.5 text-[#4169e1] dark:text-[#5c84f5]" />
+                      <MousePointer className="w-3.5 h-3.5 text-[#6395EE] dark:text-[#7baaf5]" />
                       <span>Pilih tanggal selesai...</span>
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-[#4169e1] dark:text-[#5c84f5]" />
+                      <Calendar className="w-3.5 h-3.5 text-[#6395EE] dark:text-[#7baaf5]" />
                       <span>Pilih tanggal / rentang</span>
                     </span>
                   )}

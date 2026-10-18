@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'PTSP Digital - MAN Insan Cendekia Gowa',
+  title: 'PTSP MAN Insan Cendekia Gowa',
   description:
     'Pusat Pelayanan Terpadu Satu Pintu (PTSP) MAN Insan Cendekia Gowa. Layanan terpadu pengajuan izin, peminjaman sarana, legalisir, pengaduan, dan tracking token secara online.',
   icons: {
@@ -36,7 +36,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased selection:bg-[#4169e1] selection:text-white">
+      <body className="antialiased selection:bg-[#6395EE] selection:text-white">
         {children}
       </body>
     </html>

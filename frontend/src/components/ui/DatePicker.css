@@ -1,19 +1,19 @@
 :root {
-  --n-primary: #4169e1;
+  --n-primary: #6395EE;
   --n-border: #e2e8f0;
   --n-ink: #1e293b;
   --n-muted: #64748b;
   --n-card: #ffffff;
-  --n-soft: rgba(65, 105, 225, 0.08);
+  --n-soft: rgba(99, 149, 238, 0.1);
 }
 
 .dark {
-  --n-primary: #5c84f5;
+  --n-primary: #7baaf5;
   --n-border: #1c2c54;
   --n-ink: #f1f5f9;
   --n-muted: #94a3b8;
   --n-card: #111a33;
-  --n-soft: rgba(92, 132, 245, 0.15);
+  --n-soft: rgba(123, 170, 245, 0.18);
 }
 
 .dpk-root {
@@ -54,7 +54,7 @@
 
 .dpk-trigger.dpk-open {
   border-color: var(--n-primary);
-  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.18);
+  box-shadow: 0 0 0 3px rgba(99, 149, 238, 0.22);
   background: #ffffff;
 }
 
@@ -310,7 +310,7 @@
 }
 
 .dpk-badge-btn:hover {
-  background: rgba(65, 105, 225, 0.18);
+  background: rgba(99, 149, 238, 0.18);
 }
 
 .dpk-day-range-start,
@@ -331,7 +331,7 @@
 
 .dpk-day-in-range,
 .dpk-day-in-range:hover {
-  background: rgba(65, 105, 225, 0.14) !important;
+  background: rgba(99, 149, 238, 0.15) !important;
   color: var(--n-primary) !important;
   border-radius: 0 !important;
   font-weight: 600;
@@ -378,13 +378,13 @@
 
 .dark .dpk-trigger:hover:not(.dpk-disabled),
 .dark .dpk-trigger.dpk-open {
-  border-color: #5c84f5 !important;
+  border-color: #7baaf5 !important;
   background: #111a33 !important;
-  box-shadow: 0 0 10px rgba(92, 132, 245, 0.25) !important;
+  box-shadow: 0 0 10px rgba(123, 170, 245, 0.25) !important;
 }
 
 .dark .dpk-icon {
-  color: #5c84f5 !important;
+  color: #7baaf5 !important;
 }
 
 .dark .dpk-value {
@@ -408,7 +408,7 @@
 }
 
 .dark .dpk-nav:hover {
-  background: rgba(92, 132, 245, 0.15) !important;
+  background: rgba(123, 170, 245, 0.15) !important;
   color: #ffffff !important;
 }
 
@@ -417,8 +417,8 @@
 }
 
 .dark .dpk-title:hover {
-  background: rgba(92, 132, 245, 0.15) !important;
-  color: #5c84f5 !important;
+  background: rgba(123, 170, 245, 0.15) !important;
+  color: #7baaf5 !important;
 }
 
 .dark .dpk-weekdays span {
@@ -430,13 +430,13 @@
 }
 
 .dark .dpk-day:hover:not(:disabled):not(.dpk-day-selected) {
-  background: rgba(92, 132, 245, 0.18) !important;
+  background: rgba(123, 170, 245, 0.18) !important;
   color: #ffffff !important;
 }
 
 .dark .dpk-day-today {
-  box-shadow: inset 0 0 0 1.5px #5c84f5 !important;
-  color: #5c84f5 !important;
+  box-shadow: inset 0 0 0 1.5px #7baaf5 !important;
+  color: #7baaf5 !important;
 }
 
 .dark .dpk-cell {
@@ -444,12 +444,12 @@
 }
 
 .dark .dpk-cell:hover:not(.dpk-cell-selected) {
-  background: rgba(92, 132, 245, 0.18) !important;
+  background: rgba(123, 170, 245, 0.18) !important;
   color: #ffffff !important;
 }
 
 .dark .dpk-range-header {
-  border-bottom-color: rgba(92, 132, 245, 0.25) !important;
+  border-bottom-color: rgba(123, 170, 245, 0.25) !important;
 }
 
 .dark .dpk-range-hint {
@@ -458,7 +458,7 @@
 
 .dark .dpk-range-summary {
   background: #0e172a !important;
-  border: 1px solid rgba(92, 132, 245, 0.25) !important;
+  border: 1px solid rgba(123, 170, 245, 0.25) !important;
 }
 
 .dark .dpk-range-text {

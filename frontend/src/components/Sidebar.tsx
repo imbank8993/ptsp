@@ -137,9 +137,9 @@ export default function Sidebar({
               }}
               className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer group ${
                 isActive
-                  ? 'bg-white dark:bg-[#111e3b] text-slate-900 dark:text-white shadow-md shadow-blue-950/25 translate-x-1 border border-transparent dark:border-[#4169e1]/40'
+                  ? 'bg-white dark:bg-[#111e3b] text-slate-900 dark:text-white shadow-md shadow-blue-950/25 translate-x-1 border border-transparent dark:border-[#6395EE]/40'
                   : isTracker
-                  ? 'bg-[#4169e1]/20 text-blue-100 hover:bg-[#4169e1]/30 border border-blue-400/30'
+                  ? 'bg-[#6395EE]/20 text-blue-100 hover:bg-[#6395EE]/30 border border-blue-400/30'
                   : 'text-white/85 hover:bg-white/10 hover:text-white'
               }`}
             >
@@ -147,7 +147,7 @@ export default function Sidebar({
                 <div
                   className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                     isActive
-                      ? 'bg-blue-50 dark:bg-blue-950/70 text-[#4169e1] dark:text-[#5c84f5]'
+                      ? 'bg-blue-50 dark:bg-blue-950/70 text-[#6395EE] dark:text-[#7baaf5]'
                       : 'bg-white/10 text-white/90'
                   }`}
                 >
@@ -162,9 +162,9 @@ export default function Sidebar({
                 </span>
               </div>
 
-              {/* Royal Blue indicator dot for active item */}
+              {/* Indicator dot for active item */}
               {isActive && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#4169e1] dark:bg-[#5c84f5] shrink-0 ml-2" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#6395EE] dark:bg-[#7baaf5] shrink-0 ml-2" />
               )}
             </button>
           );
