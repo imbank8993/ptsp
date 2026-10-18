@@ -32,12 +32,17 @@ export default function PtspHomePage() {
   useEffect(() => {
     const savedTheme = localStorage.getItem('ptsp_theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    const dark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    if (dark) {
       setIsDark(true);
       document.documentElement.classList.add('dark');
     } else {
       setIsDark(false);
       document.documentElement.classList.remove('dark');
+    }
+    const metaTheme = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute('content', dark ? '#0f172a' : '#ffffff');
     }
   }, []);
 
@@ -50,6 +55,10 @@ export default function PtspHomePage() {
       } else {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('ptsp_theme', 'light');
+      }
+      const metaTheme = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        metaTheme.setAttribute('content', next ? '#0f172a' : '#ffffff');
       }
       return next;
     });
@@ -69,7 +78,7 @@ export default function PtspHomePage() {
   };
 
   return (
-    <div className="h-screen w-screen flex overflow-hidden bg-[#f1f5fa] dark:bg-[#0a1120] text-slate-800 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen lg:h-screen w-full lg:w-screen flex flex-col lg:flex-row overflow-x-hidden lg:overflow-hidden bg-[#f1f5fa] dark:bg-[#0a1120] text-slate-800 dark:text-slate-100 transition-colors duration-200">
       {/* Left Sidebar (Independent scrolling) */}
       <Sidebar
         activeService={activeService}
@@ -81,8 +90,8 @@ export default function PtspHomePage() {
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />
 
-      {/* Main Container (Independent scrolling, clean without visible scrollbar) */}
-      <div className="flex-1 h-screen overflow-y-auto no-scrollbar flex flex-col min-w-0">
+      {/* Main Container (Native smooth document scroll on mobile, independent scroll on desktop) */}
+      <div className="flex-1 w-full min-h-screen lg:h-screen lg:overflow-y-auto no-scrollbar flex flex-col min-w-0">
         <Header
           onOpenMobileSidebar={() => setMobileSidebarOpen(true)}
           onOpenTracker={() => {
@@ -93,7 +102,7 @@ export default function PtspHomePage() {
           onToggleDark={handleToggleDark}
         />
 
-        <main className="flex-1 p-3.5 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full">
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-10 pb-[calc(6rem+env(safe-area-inset-bottom))] lg:pb-10 max-w-5xl mx-auto w-full">
           {activeService === 'tracker' ? (
             /* Tracker View */
             <TrackerView initialToken={trackerInitialCode} />

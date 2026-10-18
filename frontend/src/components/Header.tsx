@@ -17,8 +17,8 @@ export default function Header({
   onToggleDark,
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-30 h-[70px] bg-white/85 dark:bg-[#0f172a]/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 px-3 sm:px-8 flex items-center justify-between transition-colors duration-200 shrink-0">
-      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+    <header className="sticky top-0 z-30 min-h-[64px] sm:min-h-[70px] pt-[env(safe-area-inset-top)] bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 px-3.5 sm:px-8 flex items-center justify-between transition-colors duration-200 shrink-0">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0 py-2 sm:py-0">
         {/* Mobile menu toggle */}
         <button
           type="button"

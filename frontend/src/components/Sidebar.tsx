@@ -185,7 +185,7 @@ export default function Sidebar({
             className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="fixed inset-y-0 left-0 w-80 bg-white dark:bg-[#0f172a] shadow-2xl z-50 flex flex-col h-full border-r border-slate-200/80 dark:border-slate-800">
+          <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-[#0f172a] shadow-2xl z-50 flex flex-col h-full border-r border-slate-200/80 dark:border-slate-800 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
             {content}
           </div>
         </div>
