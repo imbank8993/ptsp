@@ -145,17 +145,17 @@ export default function Sidebar({
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div
-                  className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                     isActive
                       ? 'bg-blue-50 dark:bg-blue-950/70 text-[#4169e1] dark:text-[#5c84f5]'
                       : 'bg-white/10 text-white/90'
                   }`}
                 >
-                  <Icon className="w-4 h-4 stroke-[2.2]" />
+                  <Icon className="w-[18px] h-[18px] stroke-[2.2]" />
                 </div>
                 <span
-                  className={`text-xs font-bold truncate ${
-                    isActive ? 'text-slate-900 dark:text-white' : 'text-white'
+                  className={`text-sm font-semibold truncate ${
+                    isActive ? 'text-slate-900 dark:text-white font-bold' : 'text-white/95'
                   }`}
                 >
                   {item.title}
