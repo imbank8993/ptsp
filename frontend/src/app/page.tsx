@@ -112,9 +112,9 @@ export default function PtspHomePage() {
                 </div>
 
                 {/* Percentage Progress Badge */}
-                <div className="px-2.5 sm:px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#6395EE] dark:text-[#7baaf5] border border-blue-100 dark:border-blue-800/60 flex items-center gap-1.5 shadow-xs shrink-0">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#6395EE] dark:bg-[#7baaf5] animate-pulse" />
-                  <span className="text-[10px] sm:text-[11px] font-bold font-mono">
+                <div className="h-8 px-3.5 sm:px-4 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#6395EE] dark:text-[#7baaf5] border border-blue-100 dark:border-blue-800/60 flex items-center gap-2 shadow-xs shrink-0">
+                  <span className="w-2 h-2 rounded-full bg-[#6395EE] dark:bg-[#7baaf5] animate-pulse" />
+                  <span className="text-xs font-bold">
                     {progress}% Lengkap
                   </span>
                 </div>

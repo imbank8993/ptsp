@@ -89,7 +89,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3.5 bg-gradient-to-r from-[#6395EE] to-[#3d72d6] hover:from-[#5084e6] hover:to-[#2e62c4] text-white font-extrabold text-xs sm:text-sm rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
+            className="px-6 py-3.5 bg-[#6395EE] hover:bg-[#4d82e4] text-white font-extrabold text-xs sm:text-sm rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
           >
             {loading ? (
               <RefreshCw className="w-4 h-4 animate-spin" />
@@ -180,7 +180,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
                     ? 'bg-red-500'
                     : data.status_code === 100
                     ? 'bg-emerald-500'
-                    : 'bg-gradient-to-r from-[#6395EE] to-[#3d72d6]'
+                    : 'bg-[#6395EE]'
                 }`}
                 style={{ width: `${Math.max(data.progress_percent, 5)}%` }}
               />

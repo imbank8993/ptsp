@@ -93,11 +93,8 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Header gradient banner (#6395EE -> #3d72d6)
-      const grad = ctx.createLinearGradient(0, 0, width, 140);
-      grad.addColorStop(0, '#6395EE');
-      grad.addColorStop(1, '#3d72d6');
-      ctx.fillStyle = grad;
+      // 2. Header solid banner (#6395EE)
+      ctx.fillStyle = '#6395EE';
       ctx.fillRect(0, 0, width, 140);
 
       // Gold bottom bar on header
@@ -281,10 +278,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
         </p>
 
         {/* ================= OFFICIAL RECEIPT CARD PREVIEW ================= */}
-        <div className="relative text-left bg-gradient-to-b from-slate-50 to-white dark:from-[#0d1627] dark:to-[#101b31] border-2 border-[#6395EE]/30 dark:border-[#6395EE]/40 rounded-2xl p-4 sm:p-5 shadow-md mb-5 overflow-hidden">
-          {/* Decorative Corner Accents */}
-          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#6395EE]/20 to-transparent rounded-bl-full pointer-events-none" />
-          
+        <div className="relative text-left bg-slate-50 dark:bg-[#0d1627] border-2 border-[#6395EE]/30 dark:border-[#6395EE]/40 rounded-2xl p-4 sm:p-5 shadow-xs mb-5 overflow-hidden">
           {/* Card Header */}
           <div className="flex items-center gap-3 pb-3 border-b border-slate-200/80 dark:border-slate-800">
             <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/10 p-1 shadow-xs border border-slate-200/60 dark:border-white/10 shrink-0">
@@ -413,7 +407,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
           <button
             type="button"
             onClick={() => onTrackNow(data.short_code)}
-            className="w-full h-11 bg-gradient-to-r from-[#6395EE] to-[#3d72d6] hover:from-[#5084e6] hover:to-[#2e62c4] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full h-11 bg-[#6395EE] hover:bg-[#4d82e4] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Lacak Status Permohonan</span>
             <ArrowRight className="w-4 h-4" />

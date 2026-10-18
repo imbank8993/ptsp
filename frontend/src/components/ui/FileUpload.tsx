@@ -144,7 +144,7 @@ export default function FileUpload({
             </div>
             <div className="w-full h-2 bg-blue-100 dark:bg-blue-950/60 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#6395EE] to-[#3d72d6] transition-all duration-300 rounded-full"
+                className="h-full bg-[#6395EE] transition-all duration-300 rounded-full"
                 style={{ width: `${progress}%` }}
               />
             </div>
