@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --ptsp-primary: #2d79d6;
   --ptsp-primary-hover: #2266ba;
@@ -109,11 +111,28 @@ html, body {
 
 /* Dark mode form helpers */
 .dark label {
-  color: #cbd5e1;
+  color: #cbd5e1 !important;
+}
+
+.dark .char-counter {
+  color: #94a3b8 !important;
+}
+
+.dark select.ptsp-input {
+  background-color: #121d33;
+  color: #f1f5f9;
 }
 
 .dark input::-webkit-calendar-picker-indicator {
   filter: invert(1);
+}
+
+.dark .bg-red-50 {
+  background-color: rgba(69, 10, 10, 0.35) !important;
+}
+
+.dark .text-red-700 {
+  color: #fca5a5 !important;
 }
 
 /* Submit Button */
