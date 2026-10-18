@@ -31,7 +31,7 @@ export default function Header({
 
         {/* Title and Tagline */}
         <div className="min-w-0">
-          <h2 className="text-xs sm:text-base font-black text-slate-800 dark:text-slate-100 leading-tight">
+          <h2 className="text-xs sm:text-base font-semibold text-slate-800 dark:text-slate-100 leading-tight">
             <span className="block sm:inline">Pelayanan Terpadu</span>{' '}
             <span className="block sm:inline">Satu Pintu</span>
           </h2>
