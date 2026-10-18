@@ -26,8 +26,8 @@ jobs:
           script: |
             echo "🚀 [1/5] Memulai deployment PTSP..."
 
-            # Direktori target di VPS (default: /var/www/ptsp)
-            DEPLOY_PATH="${{ secrets.VPS_DEPLOY_PATH || '/var/www/ptsp' }}"
+            # Direktori target di VPS (default: /www/wwwroot/ptsp untuk aaPanel)
+            DEPLOY_PATH="${{ secrets.VPS_DEPLOY_PATH || '/www/wwwroot/ptsp' }}"
 
             if [ ! -d "$DEPLOY_PATH" ]; then
               echo "Direktori $DEPLOY_PATH belum ada. Melakukan git clone..."
