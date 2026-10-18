@@ -17,30 +17,30 @@ export default function Header({
   onToggleDark,
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-30 h-[70px] bg-white/85 dark:bg-[#0f172a]/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 px-4 sm:px-8 flex items-center justify-between transition-colors duration-200 shrink-0">
-      <div className="flex items-center gap-3">
+    <header className="sticky top-0 z-30 h-[70px] bg-white/85 dark:bg-[#0f172a]/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 px-3 sm:px-8 flex items-center justify-between transition-colors duration-200 shrink-0">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
         {/* Mobile menu toggle */}
         <button
           type="button"
           onClick={onOpenMobileSidebar}
-          className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+          className="lg:hidden p-1.5 sm:p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition shrink-0"
           title="Buka Menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         {/* Title and Tagline */}
-        <div>
-          <h2 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 leading-tight">
+        <div className="min-w-0">
+          <h2 className="text-xs sm:text-base font-black text-slate-800 dark:text-slate-100 leading-tight truncate">
             Pelayanan Terpadu Satu Pintu
           </h2>
-          <p className="text-[10.5px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5 line-clamp-1">
+          <p className="hidden sm:block text-[10.5px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5 line-clamp-1">
             Pelayanan Cepat, Transparan, dan Akuntabel
           </p>
         </div>
       </div>
 
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         {/* Dark Mode Toggle */}
         <button
           type="button"

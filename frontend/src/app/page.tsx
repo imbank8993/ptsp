@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar, { PTSP_SERVICES } from '@/components/Sidebar';
 import Header from '@/components/Header';
-import MascotBot from '@/components/ui/MascotBot';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import SuccessModal from '@/components/ui/SuccessModal';
 import TrackerView from '@/components/tracker/TrackerView';
@@ -94,28 +93,28 @@ export default function PtspHomePage() {
           onToggleDark={handleToggleDark}
         />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full">
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full">
           {activeService === 'tracker' ? (
             /* Tracker View */
             <TrackerView initialToken={trackerInitialCode} />
           ) : (
             /* Main Form Card */
-            <div className="bg-white dark:bg-[#121d33] rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200/80 dark:border-[#1e3052] transition-colors duration-200 relative">
+            <div className="bg-white dark:bg-[#121d33] rounded-2xl sm:rounded-3xl p-4 sm:p-10 shadow-sm border border-slate-200/80 dark:border-[#1e3052] transition-colors duration-200 relative">
               {/* Form Header */}
-              <div className="flex items-center justify-between pb-5 mb-6 border-b border-slate-100 dark:border-slate-800/80">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-[#4169e1] dark:text-[#5c84f5] shadow-sm border border-blue-100 dark:border-blue-900/60 flex items-center justify-center p-2 transition-transform hover:scale-105">
-                    {CurrentIcon && <CurrentIcon className="w-5 h-5 stroke-[2]" />}
+              <div className="flex items-center justify-between pb-4 sm:pb-5 mb-5 sm:mb-6 border-b border-slate-100 dark:border-slate-800/80 gap-2">
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-[#4169e1] dark:text-[#5c84f5] shadow-sm border border-blue-100 dark:border-blue-900/60 flex items-center justify-center p-1.5 sm:p-2 transition-transform hover:scale-105 shrink-0">
+                    {CurrentIcon && <CurrentIcon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />}
                   </div>
-                  <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug">
+                  <h2 className="text-sm sm:text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug truncate">
                     {currentServiceMeta?.title}
                   </h2>
                 </div>
 
                 {/* Percentage Progress Badge */}
-                <div className="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#4169e1] dark:text-[#5c84f5] border border-blue-100 dark:border-blue-800/60 flex items-center gap-1.5 shadow-xs shrink-0">
+                <div className="px-2.5 sm:px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#4169e1] dark:text-[#5c84f5] border border-blue-100 dark:border-blue-800/60 flex items-center gap-1.5 shadow-xs shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#4169e1] dark:bg-[#5c84f5] animate-pulse" />
-                  <span className="text-[11px] font-bold font-mono">
+                  <span className="text-[10px] sm:text-[11px] font-bold font-mono">
                     {progress}% Lengkap
                   </span>
                 </div>
@@ -188,9 +187,6 @@ export default function PtspHomePage() {
           )}
         </main>
       </div>
-
-      {/* Interactive Mascot Bot at Bottom Right */}
-      <MascotBot progress={progress} />
 
       {/* Floating WhatsApp Helpdesk button */}
       <WhatsAppButton />
