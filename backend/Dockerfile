@@ -24,7 +24,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=3002
+ENV PORT=3003
 
 # Run as non-root user
 USER node
@@ -33,9 +33,9 @@ COPY --chown=node:node package.json ./
 COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /app/dist ./dist
 
-EXPOSE 3002
+EXPOSE 3003
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3002/api/health || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3003/api/health || exit 1
 
 CMD ["node", "dist/main.js"]

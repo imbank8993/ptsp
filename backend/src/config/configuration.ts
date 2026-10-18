@@ -1,5 +1,5 @@
 export default () => ({
-  port: parseInt(process.env.PORT, 10) || 3002,
+  port: parseInt(process.env.PORT, 10) || 3003,
   database: {
     url: process.env.DATABASE_URL || 'postgresql://postgres:08septembeR%40k12%5E@194.233.81.192:5432/acca_db?schema=public',
   },

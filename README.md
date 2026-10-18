@@ -78,7 +78,7 @@ Aplikasi Pusat Pelayanan Terpadu Satu Pintu (PTSP) digital untuk **MAN Insan Cen
 ### A. Menjalankan dengan Docker Compose (Disarankan)
 Aplikasi sudah dikonfigurasi dengan Dockerfile multi-stage yang ringan dan aman:
 - **Frontend (Next.js)**: Berjalan di port **3001** (`http://localhost:3001`)
-- **Backend (NestJS)**: Berjalan di port **3002** (`http://localhost:3002/api`)
+- **Backend (NestJS)**: Berjalan di port **3003** (`http://localhost:3003/api`)
 
 Jalankan perintah berikut:
 ```bash
@@ -98,7 +98,7 @@ docker compose down
 npm run dev
 
 # 2. Atau jalankan secara terpisah:
-npm run dev:backend   # Port 3002 (http://localhost:3002/api)
+npm run dev:backend   # Port 3003 (http://localhost:3003/api)
 npm run dev:frontend  # Port 3001 (http://localhost:3001)
 ```
 
