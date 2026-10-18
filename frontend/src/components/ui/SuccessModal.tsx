@@ -36,7 +36,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#2B60DE', '#1e46a8', '#10b981', '#f59e0b'],
+          colors: ['#005599', '#004480', '#10b981', '#f59e0b'],
         });
       } catch (e) {
         // Safe fallback if canvas-confetti not available
@@ -93,8 +93,8 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Header solid banner (#2B60DE)
-      ctx.fillStyle = '#2B60DE';
+      // 2. Header solid banner (#005599)
+      ctx.fillStyle = '#005599';
       ctx.fillRect(0, 0, width, 140);
 
       // Gold bottom bar on header
@@ -159,7 +159,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
 
       // Short Code Frame
       ctx.fillStyle = '#f8fafc';
-      ctx.strokeStyle = '#2B60DE';
+      ctx.strokeStyle = '#005599';
       ctx.lineWidth = 2;
       ctx.beginPath();
       if (ctx.roundRect) {
@@ -278,7 +278,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
         </p>
 
         {/* ================= OFFICIAL RECEIPT CARD PREVIEW ================= */}
-        <div className="relative text-left bg-slate-50 dark:bg-[#0d1627] border-2 border-[#2B60DE]/30 dark:border-[#2B60DE]/40 rounded-2xl p-4 sm:p-5 shadow-xs mb-5 overflow-hidden">
+        <div className="relative text-left bg-slate-50 dark:bg-[#0d1627] border-2 border-[#005599]/30 dark:border-[#005599]/40 rounded-2xl p-4 sm:p-5 shadow-xs mb-5 overflow-hidden">
           {/* Card Header */}
           <div className="flex items-center gap-3 pb-3 border-b border-slate-200/80 dark:border-slate-800">
             <div className="w-10 h-10 rounded-xl bg-white dark:bg-white/10 p-1 shadow-xs border border-slate-200/60 dark:border-white/10 shrink-0">
@@ -307,17 +307,17 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
           {/* Short Code Feature Box */}
           <div className="my-3 p-3 bg-blue-50/70 dark:bg-blue-950/40 rounded-xl border border-blue-100 dark:border-blue-900/60 flex items-center justify-between gap-2">
             <div>
-              <p className="text-[9.5px] font-bold text-[#2B60DE] dark:text-[#5c8cf0] uppercase tracking-wider">
+              <p className="text-[9.5px] font-bold text-[#005599] dark:text-[#4da6ff] uppercase tracking-wider">
                 Kode Lacak (Short Code)
               </p>
-              <p className="text-xl sm:text-2xl font-black text-[#2B60DE] dark:text-[#5c8cf0] font-mono tracking-widest">
+              <p className="text-xl sm:text-2xl font-black text-[#005599] dark:text-[#4da6ff] font-mono tracking-widest">
                 {data.short_code}
               </p>
             </div>
             <button
               onClick={handleCopyCode}
               type="button"
-              className="px-3 py-2 rounded-xl bg-white dark:bg-[#182744] text-[#2B60DE] dark:text-[#5c8cf0] shadow-xs hover:bg-blue-100 dark:hover:bg-[#1e3256] transition border border-blue-200 dark:border-blue-900/70 flex items-center gap-1.5 text-xs font-bold shrink-0 cursor-pointer"
+              className="px-3 py-2 rounded-xl bg-white dark:bg-[#182744] text-[#005599] dark:text-[#4da6ff] shadow-xs hover:bg-blue-100 dark:hover:bg-[#1e3256] transition border border-blue-200 dark:border-blue-900/70 flex items-center gap-1.5 text-xs font-bold shrink-0 cursor-pointer"
               title="Salin Kode Lacak"
             >
               {copiedCode ? (
@@ -351,7 +351,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
                 <FileText className="w-3.5 h-3.5 text-slate-400" />
                 <span>Layanan</span>
               </span>
-              <span className="font-bold text-[#2B60DE] dark:text-[#5c8cf0] text-right truncate ml-2">
+              <span className="font-bold text-[#005599] dark:text-[#4da6ff] text-right truncate ml-2">
                 {data.service_type}
               </span>
             </div>
@@ -407,7 +407,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
           <button
             type="button"
             onClick={() => onTrackNow(data.short_code)}
-            className="w-full h-11 bg-[#2B60DE] hover:bg-[#2451be] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full h-11 bg-[#005599] hover:bg-[#004480] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Lacak Status Permohonan</span>
             <ArrowRight className="w-4 h-4" />

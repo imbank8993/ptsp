@@ -102,7 +102,7 @@ export default function Sidebar({
             />
           </div>
           <div>
-            <h1 className="text-base font-black tracking-wider leading-none text-[#2B60DE] dark:text-[#5c8cf0]">
+            <h1 className="text-base font-black tracking-wider leading-none text-[#005599] dark:text-[#4da6ff]">
               PTSP DIGITAL
             </h1>
             <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1 tracking-wide">
@@ -137,9 +137,9 @@ export default function Sidebar({
               }}
               className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer group ${
                 isActive
-                  ? 'bg-[#2B60DE] text-white shadow-md shadow-[#2B60DE]/25 translate-x-1 font-bold'
+                  ? 'bg-[#005599] text-white shadow-md shadow-[#005599]/25 translate-x-1 font-bold'
                   : isTracker
-                  ? 'bg-blue-50/80 dark:bg-blue-950/40 text-[#2B60DE] dark:text-[#5c8cf0] hover:bg-blue-100/70 dark:hover:bg-blue-900/50 border border-blue-200/80 dark:border-blue-900/50 font-semibold'
+                  ? 'bg-blue-50/80 dark:bg-blue-950/40 text-[#005599] dark:text-[#4da6ff] hover:bg-blue-100/70 dark:hover:bg-blue-900/50 border border-blue-200/80 dark:border-blue-900/50 font-semibold'
                   : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/60 font-medium'
               }`}
             >
@@ -149,7 +149,7 @@ export default function Sidebar({
                     isActive
                       ? 'bg-white/20 text-white'
                       : isTracker
-                      ? 'bg-white dark:bg-blue-900/50 text-[#2B60DE] dark:text-[#5c8cf0] shadow-xs'
+                      ? 'bg-white dark:bg-blue-900/50 text-[#005599] dark:text-[#4da6ff] shadow-xs'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-white'
                   }`}
                 >

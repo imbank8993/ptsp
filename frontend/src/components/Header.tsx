@@ -59,7 +59,7 @@ export default function Header({
         <button
           type="button"
           onClick={onOpenTracker}
-          className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-[#2B60DE] dark:text-[#5c8cf0] font-bold text-xs transition border border-blue-200/60 dark:border-blue-800/50 shadow-sm cursor-pointer"
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-[#005599] dark:text-[#4da6ff] font-bold text-xs transition border border-blue-200/60 dark:border-blue-800/50 shadow-sm cursor-pointer"
         >
           <Search className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Lacak Permohonan</span>
