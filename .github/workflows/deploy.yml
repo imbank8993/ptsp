@@ -48,9 +48,9 @@ jobs:
               cp backend/.env.example backend/.env
             fi
 
-            echo "🐳 [3/5] Build dan restart container Docker..."
-            docker compose down
-            docker compose up -d --build
+            echo "🐳 [3/5] Build dan restart container Docker (Zero-Downtime)..."
+            docker compose build
+            docker compose up -d --remove-orphans
 
             echo "🧹 [4/5] Membersihkan cache Docker..."
             docker image prune -f

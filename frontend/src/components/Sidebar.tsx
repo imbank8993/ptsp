@@ -102,7 +102,7 @@ export default function Sidebar({
             />
           </div>
           <div>
-            <h1 className="text-base font-black tracking-wider leading-none text-[#005599] dark:text-[#4da6ff]">
+            <h1 className="text-base font-black tracking-wider leading-none text-[#2B60DE] dark:text-[#5c8cf0]">
               PTSP DIGITAL
             </h1>
             <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1 tracking-wide">
