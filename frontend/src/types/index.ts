@@ -14,7 +14,7 @@ export type ServiceId =
 export interface ServiceItem {
   id: ServiceId;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   icon: string;
   color?: string;
   badge?: string;

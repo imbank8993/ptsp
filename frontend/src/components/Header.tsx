@@ -29,13 +29,13 @@ export default function Header({
           <Menu className="w-5 h-5" />
         </button>
 
-        {/* Title without logo as requested */}
+        {/* Title and Tagline */}
         <div>
           <h2 className="text-sm sm:text-base font-black text-slate-800 dark:text-slate-100 leading-tight">
-            Pusat Pengajuan Digital PTSP
+            Pelayanan Terpadu Satu Pintu
           </h2>
-          <p className="text-[11px] text-slate-400 dark:text-slate-400 font-medium hidden sm:block">
-            MAN Insan Cendekia Gowa • Pelayanan Cepat, Transparan & Akuntabel
+          <p className="text-[10.5px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5 line-clamp-1">
+            Pelayanan Cepat, Transparan, dan Akuntabel
           </p>
         </div>
       </div>

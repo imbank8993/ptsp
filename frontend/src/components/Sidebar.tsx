@@ -28,77 +28,66 @@ export const PTSP_SERVICES = [
   {
     id: 'buku-tamu' as ServiceId,
     title: 'Buku Tamu Digital',
-    subtitle: 'CATATAN KUNJUNGAN TAMU DIGITAL',
     icon: BookOpen,
     accent: '#0284c7',
   },
   {
     id: 'sosialisasi' as ServiceId,
     title: 'Pengajuan Sosialisasi',
-    subtitle: 'PERMOHONAN KUNJUNGAN & SOSIALISASI',
     icon: Megaphone,
     accent: '#ea580c',
   },
   {
     id: 'izin-siswa' as ServiceId,
     title: 'Izin Siswa Asrama',
-    subtitle: 'IZIN PULANG ATAU KELUAR SISWA',
     icon: Home,
     accent: '#059669',
   },
   {
     id: 'peminjaman-sarana' as ServiceId,
     title: 'Peminjaman Sarana',
-    subtitle: 'PINJAM SARANA DAN PRASARANA',
     icon: Building2,
     accent: '#d97706',
   },
   {
     id: 'izin-penelitian' as ServiceId,
     title: 'Izin Penelitian',
-    subtitle: 'RISET & PENGAMBILAN DATA',
     icon: Microscope,
     accent: '#2563eb',
   },
   {
     id: 'legalisir' as ServiceId,
     title: 'Layanan Legalisir',
-    subtitle: 'LEGALISIR IJAZAH & RAPOR ONLINE',
     icon: FileCheck2,
     accent: '#dc2626',
   },
   {
     id: 'ganti-ijazah' as ServiceId,
     title: 'Ganti Ijazah Hilang',
-    subtitle: 'SURAT KETERANGAN GANTI IJAZAH',
     icon: GraduationCap,
     accent: '#db2777',
   },
   {
     id: 'izin-magang' as ServiceId,
     title: 'Permohonan Magang',
-    subtitle: 'PENGAJUAN PRAKTEK / MAGANG',
     icon: Briefcase,
     accent: '#d97706',
   },
   {
     id: 'mutasi-siswa' as ServiceId,
     title: 'Mutasi Keluar Siswa',
-    subtitle: 'PINDAH SEKOLAH KELUAR',
     icon: ArrowLeftRight,
     accent: '#2d79d6',
   },
   {
     id: 'pengaduan' as ServiceId,
     title: 'Pengaduan Masyarakat',
-    subtitle: 'LAYANAN PENGADUAN & ASPIRASI',
     icon: AlertCircle,
     accent: '#dc2626',
   },
   {
     id: 'tracker' as ServiceId,
     title: 'Lacak Permohonan',
-    subtitle: 'TRACKING DENGAN KODE TOKEN',
     icon: QrCode,
     accent: '#10b981',
   },
@@ -142,8 +131,8 @@ export default function Sidebar({
         </button>
       </div>
 
-      {/* Services List with independent smooth scrolling and no visible scrollbar */}
-      <div className="flex-1 overflow-y-auto no-scrollbar px-3.5 py-4 space-y-1.5">
+      {/* Services List with independent smooth scrolling and clean compact gap */}
+      <div className="flex-1 overflow-y-auto no-scrollbar px-3 py-3 space-y-1">
         {PTSP_SERVICES.map((item) => {
           const Icon = item.icon;
           const isActive = activeService === item.id;
@@ -157,9 +146,9 @@ export default function Sidebar({
                 onSelectService(item.id);
                 onCloseMobile();
               }}
-              className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-3 rounded-2xl cursor-pointer group ${
+              className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer group ${
                 isActive
-                  ? 'bg-white dark:bg-[#142340] text-slate-900 dark:text-white shadow-xl shadow-blue-950/20 translate-x-1 border border-transparent dark:border-blue-500/30'
+                  ? 'bg-white dark:bg-[#142340] text-slate-900 dark:text-white shadow-md shadow-blue-950/20 translate-x-1 border border-transparent dark:border-blue-500/30'
                   : isTracker
                   ? 'bg-emerald-500/20 text-emerald-200 hover:bg-emerald-500/30 border border-emerald-400/30'
                   : 'text-white/85 hover:bg-white/10 hover:text-white'
@@ -167,7 +156,7 @@ export default function Sidebar({
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div
-                  className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                     isActive
                       ? 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                       : 'bg-white/10 text-white'
@@ -176,27 +165,18 @@ export default function Sidebar({
                 >
                   <Icon className="w-4 h-4 stroke-[2.2]" />
                 </div>
-                <div className="truncate text-left">
-                  <p
-                    className={`text-xs font-black truncate leading-snug ${
-                      isActive ? 'text-slate-900 dark:text-white' : 'text-white'
-                    }`}
-                  >
-                    {item.title}
-                  </p>
-                  <p
-                    className={`text-[9.5px] uppercase font-bold tracking-wider truncate mt-0.5 ${
-                      isActive ? 'text-[#2d79d6] dark:text-[#60a5fa]' : 'text-blue-200/60'
-                    }`}
-                  >
-                    {item.subtitle}
-                  </p>
-                </div>
+                <span
+                  className={`text-xs font-bold truncate ${
+                    isActive ? 'text-slate-900 dark:text-white' : 'text-white'
+                  }`}
+                >
+                  {item.title}
+                </span>
               </div>
 
-              {/* Blue indicator dot for active item */}
+              {/* Indicator dot for active item */}
               {isActive && (
-                <div className="w-2 h-2 rounded-full bg-[#2d79d6] dark:bg-[#4d92ee] shrink-0 ml-2" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#2d79d6] dark:bg-[#4d92ee] shrink-0 ml-2" />
               )}
             </button>
           );
