@@ -91,9 +91,9 @@ export default function Sidebar({
   const content = (
     <div className="flex flex-col h-full text-white">
       {/* Brand Header with Logo Insan Cendekia */}
-      <div className="p-5 sm:p-6 pb-4 flex items-center justify-between border-b border-white/10 shrink-0">
+      <div className="h-[70px] px-5 sm:px-6 flex items-center justify-between border-b border-white/10 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-white/15 dark:bg-white/10 backdrop-blur-md flex items-center justify-center p-1.5 shadow-inner border border-white/20">
+          <div className="w-10 h-10 rounded-xl bg-white/15 dark:bg-white/10 backdrop-blur-md flex items-center justify-center p-1 shadow-inner border border-white/20 shrink-0">
             {/* Logo Insan Cendekia */}
             <img
               src="/Logo Insan Cendekia.png"
@@ -105,7 +105,7 @@ export default function Sidebar({
             <h1 className="text-base font-black tracking-tight leading-none text-white">
               PTSP DIGITAL
             </h1>
-            <p className="text-[11px] font-semibold text-blue-200/90 mt-0.5 tracking-wide">
+            <p className="text-[11px] font-semibold text-blue-200/90 mt-1 tracking-wide">
               MAN Insan Cendekia Gowa
             </p>
           </div>
