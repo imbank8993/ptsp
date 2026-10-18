@@ -104,10 +104,7 @@ export default function PtspHomePage() {
               {/* Form Header */}
               <div className="flex items-center justify-between pb-5 mb-6 border-b border-slate-100 dark:border-slate-800/80">
                 <div className="flex items-center gap-3">
-                  <div
-                    className="w-10 h-10 rounded-xl bg-white dark:bg-[#182744] shadow-sm border border-slate-100 dark:border-slate-800 flex items-center justify-center p-2 transition-transform hover:scale-105"
-                    style={{ color: currentServiceMeta?.accent || '#2d79d6' }}
-                  >
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-[#4169e1] dark:text-[#5c84f5] shadow-sm border border-blue-100 dark:border-blue-900/60 flex items-center justify-center p-2 transition-transform hover:scale-105">
                     {CurrentIcon && <CurrentIcon className="w-5 h-5 stroke-[2]" />}
                   </div>
                   <h2 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug">
@@ -116,8 +113,8 @@ export default function PtspHomePage() {
                 </div>
 
                 {/* Percentage Progress Badge */}
-                <div className="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#2d79d6] dark:text-[#60a5fa] border border-blue-100 dark:border-blue-800/60 flex items-center gap-1.5 shadow-xs shrink-0">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2d79d6] dark:bg-[#60a5fa] animate-pulse" />
+                <div className="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#4169e1] dark:text-[#5c84f5] border border-blue-100 dark:border-blue-800/60 flex items-center gap-1.5 shadow-xs shrink-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4169e1] dark:bg-[#5c84f5] animate-pulse" />
                   <span className="text-[11px] font-bold font-mono">
                     {progress}% Lengkap
                   </span>

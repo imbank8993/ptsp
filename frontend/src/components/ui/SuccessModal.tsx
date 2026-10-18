@@ -23,7 +23,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#2d79d6', '#1e4480', '#10b981', '#f59e0b'],
+          colors: ['#4169e1', '#2446a8', '#10b981', '#f59e0b'],
         });
       } catch (e) {
         // Safe fallback if canvas not available
@@ -66,17 +66,17 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
 
         {/* Short Code Box */}
         <div className="bg-blue-50/60 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 rounded-2xl p-4 mb-4">
-          <p className="text-[11px] font-bold text-[#2d79d6] dark:text-[#60a5fa] uppercase tracking-wider mb-1">
+          <p className="text-[11px] font-bold text-[#4169e1] dark:text-[#5c84f5] uppercase tracking-wider mb-1">
             Kode Lacak Permohonan (Short Code)
           </p>
           <div className="flex items-center justify-center gap-2">
-            <span className="text-2xl sm:text-3xl font-black tracking-widest text-[#2d79d6] dark:text-[#60a5fa] font-mono">
+            <span className="text-2xl sm:text-3xl font-black tracking-widest text-[#4169e1] dark:text-[#5c84f5] font-mono">
               {data.short_code}
             </span>
             <button
               onClick={handleCopyCode}
               type="button"
-              className="p-2 rounded-xl bg-white dark:bg-[#182744] text-[#2d79d6] dark:text-[#60a5fa] shadow-sm hover:bg-blue-100 dark:hover:bg-[#1e3256] transition border border-blue-100 dark:border-blue-900/60"
+              className="p-2 rounded-xl bg-white dark:bg-[#182744] text-[#4169e1] dark:text-[#5c84f5] shadow-sm hover:bg-blue-100 dark:hover:bg-[#1e3256] transition border border-blue-100 dark:border-blue-900/60"
               title="Salin Kode"
             >
               {copiedCode ? <CheckCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -108,7 +108,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
           <button
             type="button"
             onClick={() => onTrackNow(data.short_code)}
-            className="w-full h-12 bg-gradient-to-r from-[#2d79d6] to-[#1e4480] hover:from-[#2466b8] hover:to-[#17386c] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full h-12 bg-gradient-to-r from-[#4169e1] to-[#2446a8] hover:from-[#3558c7] hover:to-[#1d398d] text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Lacak Status Permohonan</span>
             <ArrowRight className="w-4 h-4" />

@@ -94,12 +94,12 @@ export default function FileUpload({
         onDrop={handleDrop}
         className={`relative border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[140px] ${
           isDragging
-            ? 'border-[#2d79d6] bg-blue-50/60 dark:bg-blue-950/30 scale-[1.01]'
+            ? 'border-[#4169e1] bg-blue-50/60 dark:bg-blue-950/30 scale-[1.01]'
             : value
             ? 'border-emerald-300 dark:border-emerald-700/60 bg-emerald-50/30 dark:bg-emerald-950/20'
             : error
             ? 'border-red-300 dark:border-red-800/60 bg-red-50/30 dark:bg-red-950/20'
-            : 'border-slate-200 dark:border-[#1e3052] hover:border-[#2d79d6]/60 dark:hover:border-[#2d79d6] bg-slate-50/50 dark:bg-[#0e172a]/60 hover:bg-white dark:hover:bg-[#121d33]'
+            : 'border-slate-200 dark:border-[#1e3052] hover:border-[#4169e1]/60 dark:hover:border-[#4169e1] bg-slate-50/50 dark:bg-[#0e172a]/60 hover:bg-white dark:hover:bg-[#121d33]'
         }`}
       >
         <input
@@ -138,13 +138,13 @@ export default function FileUpload({
           </div>
         ) : uploading ? (
           <div className="w-full max-w-xs space-y-2">
-            <div className="flex justify-between text-xs font-semibold text-[#2d79d6] dark:text-[#60a5fa]">
+            <div className="flex justify-between text-xs font-semibold text-[#4169e1] dark:text-[#5c84f5]">
               <span>Mengunggah berkas...</span>
               <span>{progress}%</span>
             </div>
             <div className="w-full h-2 bg-blue-100 dark:bg-blue-950/60 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#2d79d6] to-[#1e4480] transition-all duration-300 rounded-full"
+                className="h-full bg-gradient-to-r from-[#4169e1] to-[#2446a8] transition-all duration-300 rounded-full"
                 style={{ width: `${progress}%` }}
               />
             </div>

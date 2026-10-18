@@ -16,7 +16,7 @@ export default async function TrackPage({ params }: TrackPageProps) {
         <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-[#2d79d6] dark:text-[#60a5fa] hover:underline bg-white dark:bg-[#121d33] px-3.5 py-2 rounded-xl shadow-xs border border-slate-200/60 dark:border-[#1e3052]"
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#4169e1] dark:text-[#5c84f5] hover:underline bg-white dark:bg-[#121d33] px-3.5 py-2 rounded-xl shadow-xs border border-slate-200/60 dark:border-[#1e3052]"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Kembali ke Pusat Layanan PTSP</span>

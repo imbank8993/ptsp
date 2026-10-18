@@ -36,7 +36,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased selection:bg-[#2d79d6] selection:text-white">
+      <body className="antialiased selection:bg-[#4169e1] selection:text-white">
         {children}
       </body>
     </html>

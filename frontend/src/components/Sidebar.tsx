@@ -29,67 +29,56 @@ export const PTSP_SERVICES = [
     id: 'buku-tamu' as ServiceId,
     title: 'Buku Tamu Digital',
     icon: BookOpen,
-    accent: '#0284c7',
   },
   {
     id: 'sosialisasi' as ServiceId,
     title: 'Pengajuan Sosialisasi',
     icon: Megaphone,
-    accent: '#ea580c',
   },
   {
     id: 'izin-siswa' as ServiceId,
     title: 'Izin Siswa Asrama',
     icon: Home,
-    accent: '#059669',
   },
   {
     id: 'peminjaman-sarana' as ServiceId,
     title: 'Peminjaman Sarana',
     icon: Building2,
-    accent: '#d97706',
   },
   {
     id: 'izin-penelitian' as ServiceId,
     title: 'Izin Penelitian',
     icon: Microscope,
-    accent: '#2563eb',
   },
   {
     id: 'legalisir' as ServiceId,
     title: 'Layanan Legalisir',
     icon: FileCheck2,
-    accent: '#dc2626',
   },
   {
     id: 'ganti-ijazah' as ServiceId,
     title: 'Ganti Ijazah Hilang',
     icon: GraduationCap,
-    accent: '#db2777',
   },
   {
     id: 'izin-magang' as ServiceId,
     title: 'Permohonan Magang',
     icon: Briefcase,
-    accent: '#d97706',
   },
   {
     id: 'mutasi-siswa' as ServiceId,
     title: 'Mutasi Keluar Siswa',
     icon: ArrowLeftRight,
-    accent: '#2d79d6',
   },
   {
     id: 'pengaduan' as ServiceId,
     title: 'Pengaduan Masyarakat',
     icon: AlertCircle,
-    accent: '#dc2626',
   },
   {
     id: 'tracker' as ServiceId,
     title: 'Lacak Permohonan',
     icon: QrCode,
-    accent: '#10b981',
   },
 ];
 
@@ -148,9 +137,9 @@ export default function Sidebar({
               }}
               className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer group ${
                 isActive
-                  ? 'bg-white dark:bg-[#142340] text-slate-900 dark:text-white shadow-md shadow-blue-950/20 translate-x-1 border border-transparent dark:border-blue-500/30'
+                  ? 'bg-white dark:bg-[#111e3b] text-slate-900 dark:text-white shadow-md shadow-blue-950/25 translate-x-1 border border-transparent dark:border-[#4169e1]/40'
                   : isTracker
-                  ? 'bg-emerald-500/20 text-emerald-200 hover:bg-emerald-500/30 border border-emerald-400/30'
+                  ? 'bg-[#4169e1]/20 text-blue-100 hover:bg-[#4169e1]/30 border border-blue-400/30'
                   : 'text-white/85 hover:bg-white/10 hover:text-white'
               }`}
             >
@@ -158,10 +147,9 @@ export default function Sidebar({
                 <div
                   className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                     isActive
-                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
-                      : 'bg-white/10 text-white'
+                      ? 'bg-blue-50 dark:bg-blue-950/70 text-[#4169e1] dark:text-[#5c84f5]'
+                      : 'bg-white/10 text-white/90'
                   }`}
-                  style={isActive ? { color: item.accent } : undefined}
                 >
                   <Icon className="w-4 h-4 stroke-[2.2]" />
                 </div>
@@ -174,9 +162,9 @@ export default function Sidebar({
                 </span>
               </div>
 
-              {/* Indicator dot for active item */}
+              {/* Royal Blue indicator dot for active item */}
               {isActive && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#2d79d6] dark:bg-[#4d92ee] shrink-0 ml-2" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#4169e1] dark:bg-[#5c84f5] shrink-0 ml-2" />
               )}
             </button>
           );
@@ -201,19 +189,19 @@ export default function Sidebar({
 
   return (
     <>
-      {/* Desktop Sidebar (Permanent, independent scroll, no-scrollbar) */}
-      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 h-screen sticky top-0 bg-gradient-to-b from-[#1e4480] via-[#17376c] to-[#122c57] dark:from-[#0d1627] dark:via-[#091120] dark:to-[#060b15] shadow-2xl z-20 border-r border-blue-900/20 dark:border-slate-800">
+      {/* Desktop Sidebar (Permanent, independent scroll, no-scrollbar, royal blue gradient) */}
+      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 h-screen sticky top-0 bg-gradient-to-b from-[#1e3a8a] via-[#1a3277] to-[#132457] dark:from-[#0a1126] dark:via-[#070c1c] dark:to-[#040710] shadow-2xl z-20 border-r border-blue-900/20 dark:border-slate-800">
         {content}
       </aside>
 
-      {/* Mobile Drawer (Clean, no-scrollbar) */}
+      {/* Mobile Drawer (Clean, no-scrollbar, royal blue gradient) */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-[#1e4480] via-[#17376c] to-[#122c57] dark:from-[#0d1627] dark:via-[#091120] dark:to-[#060b15] shadow-2xl z-50 flex flex-col h-full">
+          <div className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-[#1e3a8a] via-[#1a3277] to-[#132457] dark:from-[#0a1126] dark:via-[#070c1c] dark:to-[#040710] shadow-2xl z-50 flex flex-col h-full">
             {content}
           </div>
         </div>
