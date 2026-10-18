@@ -33,9 +33,9 @@ export default function MascotBot({ progress = 0, message }: MascotBotProps) {
             : 'opacity-0 scale-90 translate-y-2 pointer-events-none'
         }`}
       >
-        <div className="bg-white text-slate-800 text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl border border-purple-100 relative">
+        <div className="bg-white dark:bg-[#121d33] text-slate-800 dark:text-slate-100 text-xs font-semibold px-4 py-2.5 rounded-2xl shadow-xl border border-blue-100 dark:border-[#1e3052] relative transition-colors">
           <p className="leading-snug">{getTip()}</p>
-          <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white border-b border-r border-purple-100 transform rotate-45" />
+          <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white dark:bg-[#121d33] border-b border-r border-blue-100 dark:border-[#1e3052] transform rotate-45" />
         </div>
       </div>
 

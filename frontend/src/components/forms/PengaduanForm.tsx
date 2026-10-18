@@ -88,9 +88,9 @@ export default function PengaduanForm({
                   if (e.target.checked) handleChange('nama', 'Anonim');
                   else handleChange('nama', '');
                 }}
-                className="rounded text-[#6320ee] cursor-pointer"
+                className="rounded text-[#2d79d6] accent-[#2d79d6] cursor-pointer"
               />
-              <label htmlFor="anonim" className="text-[11px] text-slate-500 font-semibold cursor-pointer">
+              <label htmlFor="anonim" className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold cursor-pointer">
                 Kirim Anonim
               </label>
             </div>
@@ -180,7 +180,7 @@ export default function PengaduanForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full h-12 bg-gradient-to-r from-[#6320ee] to-[#4f1cdb] hover:from-[#5218cb] hover:to-[#4314be] text-white font-black text-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+        className="ptsp-btn-submit"
       >
         <Send className="w-4 h-4" />
         <span>{loading ? 'Mengirim Laporan...' : 'Kirim Laporan Pengaduan'}</span>

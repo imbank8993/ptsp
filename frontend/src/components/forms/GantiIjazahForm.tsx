@@ -239,7 +239,7 @@ export default function GantiIjazahForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full h-12 bg-gradient-to-r from-[#6320ee] to-[#4f1cdb] hover:from-[#5218cb] hover:to-[#4314be] text-white font-black text-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+        className="ptsp-btn-submit"
       >
         <Send className="w-4 h-4" />
         <span>{loading ? 'Mengirim Permohonan...' : 'Kirim Permohonan Sekarang'}</span>

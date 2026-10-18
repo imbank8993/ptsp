@@ -30,7 +30,7 @@ export const PTSP_SERVICES = [
     title: 'Buku Tamu Digital',
     subtitle: 'CATATAN KUNJUNGAN TAMU DIGITAL',
     icon: BookOpen,
-    accent: '#0891b2',
+    accent: '#0284c7',
   },
   {
     id: 'sosialisasi' as ServiceId,
@@ -58,7 +58,7 @@ export const PTSP_SERVICES = [
     title: 'Izin Penelitian',
     subtitle: 'RISET & PENGAMBILAN DATA',
     icon: Microscope,
-    accent: '#3083FF',
+    accent: '#2563eb',
   },
   {
     id: 'legalisir' as ServiceId,
@@ -86,7 +86,7 @@ export const PTSP_SERVICES = [
     title: 'Mutasi Keluar Siswa',
     subtitle: 'PINDAH SEKOLAH KELUAR',
     icon: ArrowLeftRight,
-    accent: '#3083FF',
+    accent: '#2d79d6',
   },
   {
     id: 'pengaduan' as ServiceId,
@@ -112,18 +112,22 @@ export default function Sidebar({
 }: SidebarProps) {
   const content = (
     <div className="flex flex-col h-full text-white">
-      {/* Brand Header */}
-      <div className="p-5 sm:p-6 pb-4 flex items-center justify-between border-b border-white/10">
+      {/* Brand Header with Logo Insan Cendekia */}
+      <div className="p-5 sm:p-6 pb-4 flex items-center justify-between border-b border-white/10 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center p-1.5 shadow-inner">
-            {/* Logo IC Gowa */}
-            <img src="/acca-logo.png" alt="Logo" className="w-full h-full object-contain" />
+          <div className="w-11 h-11 rounded-2xl bg-white/15 dark:bg-white/10 backdrop-blur-md flex items-center justify-center p-1.5 shadow-inner border border-white/20">
+            {/* Logo Insan Cendekia */}
+            <img
+              src="/Logo Insan Cendekia.png"
+              alt="Logo Insan Cendekia"
+              className="w-full h-full object-contain filter drop-shadow-sm"
+            />
           </div>
           <div>
             <h1 className="text-base font-black tracking-tight leading-none text-white">
               PTSP DIGITAL
             </h1>
-            <p className="text-[11px] font-medium text-white/75 mt-0.5">
+            <p className="text-[11px] font-semibold text-blue-200/90 mt-0.5 tracking-wide">
               MAN Insan Cendekia Gowa
             </p>
           </div>
@@ -132,14 +136,14 @@ export default function Sidebar({
         {/* Mobile close button */}
         <button
           onClick={onCloseMobile}
-          className="lg:hidden p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition"
+          className="lg:hidden p-2 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition"
         >
           <X className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Services List */}
-      <div className="flex-1 overflow-y-auto px-3.5 py-4 space-y-1.5 custom-scroll">
+      {/* Services List with independent smooth scrolling and no visible scrollbar */}
+      <div className="flex-1 overflow-y-auto no-scrollbar px-3.5 py-4 space-y-1.5">
         {PTSP_SERVICES.map((item) => {
           const Icon = item.icon;
           const isActive = activeService === item.id;
@@ -155,7 +159,7 @@ export default function Sidebar({
               }}
               className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-3 rounded-2xl cursor-pointer group ${
                 isActive
-                  ? 'bg-white text-slate-900 shadow-xl shadow-purple-950/20 translate-x-1'
+                  ? 'bg-white dark:bg-[#142340] text-slate-900 dark:text-white shadow-xl shadow-blue-950/20 translate-x-1 border border-transparent dark:border-blue-500/30'
                   : isTracker
                   ? 'bg-emerald-500/20 text-emerald-200 hover:bg-emerald-500/30 border border-emerald-400/30'
                   : 'text-white/85 hover:bg-white/10 hover:text-white'
@@ -165,7 +169,7 @@ export default function Sidebar({
                 <div
                   className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                     isActive
-                      ? 'bg-slate-100 text-slate-800'
+                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200'
                       : 'bg-white/10 text-white'
                   }`}
                   style={isActive ? { color: item.accent } : undefined}
@@ -175,14 +179,14 @@ export default function Sidebar({
                 <div className="truncate text-left">
                   <p
                     className={`text-xs font-black truncate leading-snug ${
-                      isActive ? 'text-slate-900' : 'text-white'
+                      isActive ? 'text-slate-900 dark:text-white' : 'text-white'
                     }`}
                   >
                     {item.title}
                   </p>
                   <p
                     className={`text-[9.5px] uppercase font-bold tracking-wider truncate mt-0.5 ${
-                      isActive ? 'text-purple-600' : 'text-white/60'
+                      isActive ? 'text-[#2d79d6] dark:text-[#60a5fa]' : 'text-blue-200/60'
                     }`}
                   >
                     {item.subtitle}
@@ -192,7 +196,7 @@ export default function Sidebar({
 
               {/* Blue indicator dot for active item */}
               {isActive && (
-                <div className="w-2 h-2 rounded-full bg-[#6320ee] shrink-0 ml-2" />
+                <div className="w-2 h-2 rounded-full bg-[#2d79d6] dark:bg-[#4d92ee] shrink-0 ml-2" />
               )}
             </button>
           );
@@ -200,7 +204,7 @@ export default function Sidebar({
       </div>
 
       {/* Footer Branding */}
-      <div className="p-4 pt-3 border-t border-white/10 text-center">
+      <div className="p-4 pt-3 border-t border-white/10 text-center shrink-0">
         <div className="flex items-center justify-center gap-2 mb-1">
           <div className="h-px bg-white/20 flex-1" />
           <span className="text-[10px] font-black uppercase tracking-widest text-white/50">
@@ -217,19 +221,19 @@ export default function Sidebar({
 
   return (
     <>
-      {/* Desktop Sidebar (Permanent) */}
-      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 bg-gradient-to-b from-[#6c22f5] via-[#5d1be8] to-[#4c14c5] shadow-2xl relative z-20 min-h-screen">
+      {/* Desktop Sidebar (Permanent, independent scroll, no-scrollbar) */}
+      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 h-screen sticky top-0 bg-gradient-to-b from-[#1e4480] via-[#17376c] to-[#122c57] dark:from-[#0d1627] dark:via-[#091120] dark:to-[#060b15] shadow-2xl z-20 border-r border-blue-900/20 dark:border-slate-800">
         {content}
       </aside>
 
-      {/* Mobile Backdrop & Drawer */}
+      {/* Mobile Drawer (Clean, no-scrollbar) */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-[#6c22f5] via-[#5d1be8] to-[#4c14c5] shadow-2xl z-50 flex flex-col">
+          <div className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-[#1e4480] via-[#17376c] to-[#122c57] dark:from-[#0d1627] dark:via-[#091120] dark:to-[#060b15] shadow-2xl z-50 flex flex-col h-full">
             {content}
           </div>
         </div>

@@ -1,88 +1,149 @@
 @import "tailwindcss";
 
 :root {
-  --ptsp-primary: #6320ee;
-  --ptsp-primary-hover: #5218cb;
-  --ptsp-secondary: #3083ff;
-  --ptsp-bg-sidebar: #5d1be8;
-  --ptsp-sidebar-gradient: linear-gradient(180deg, #6c22f5 0%, #5013ca 100%);
-  --ptsp-accent-pink: #ec4899;
-  --ptsp-accent-emerald: #10b981;
+  --ptsp-primary: #2d79d6;
+  --ptsp-primary-hover: #2266ba;
+  --ptsp-primary-light: #eaf2fc;
+  --ptsp-bg-page: #f1f5fa;
+  --ptsp-bg-card: #ffffff;
+  --ptsp-border: #e2e8f0;
+  --ptsp-text: #1e293b;
+  --ptsp-text-muted: #64748b;
+  --ptsp-sidebar-gradient: linear-gradient(180deg, #1f4788 0%, #17376c 100%);
 }
 
-body {
+.dark {
+  --ptsp-primary: #4d92ee;
+  --ptsp-primary-hover: #3b82f6;
+  --ptsp-primary-light: #162a4d;
+  --ptsp-bg-page: #0a1120;
+  --ptsp-bg-card: #121d33;
+  --ptsp-border: #1e3052;
+  --ptsp-text: #f1f5f9;
+  --ptsp-text-muted: #94a3b8;
+  --ptsp-sidebar-gradient: linear-gradient(180deg, #0e182b 0%, #09101d 100%);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #f6f8fc;
-  color: #1e293b;
-  overflow-x: hidden;
+  background-color: var(--ptsp-bg-page);
+  color: var(--ptsp-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Hide scrollbar completely for clean mobile view */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
+
+.no-scrollbar {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
 }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
+
+/* Custom Minimalist Clean Underline Inputs */
+.ptsp-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--ptsp-border);
+  padding: 0.5rem 0.25rem;
+  font-size: 0.925rem;
+  color: var(--ptsp-text);
+  outline: none;
+  transition: all 0.2s ease-in-out;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+
+.ptsp-input:focus {
+  border-bottom-color: var(--ptsp-primary);
+  box-shadow: 0 1px 0 0 var(--ptsp-primary);
+}
+
+.ptsp-input::placeholder {
+  color: var(--ptsp-text-muted);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.dark .ptsp-input option {
+  background-color: #121d33;
+  color: #f1f5f9;
+}
+
+/* Custom Textarea */
+.ptsp-textarea {
+  width: 100%;
+  background: rgba(241, 245, 250, 0.6);
+  border: 1.5px solid var(--ptsp-border);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  font-size: 0.925rem;
+  color: var(--ptsp-text);
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  resize: vertical;
+}
+
+.dark .ptsp-textarea {
+  background: rgba(18, 29, 51, 0.8);
+}
+
+.ptsp-textarea:focus {
+  border-color: var(--ptsp-primary);
+  background: var(--ptsp-bg-card);
+  box-shadow: 0 0 0 3px rgba(45, 121, 214, 0.15);
 }
 
 /* Character counter styling */
 .char-counter {
   font-size: 0.72rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--ptsp-text-muted);
   letter-spacing: 0.02em;
 }
 
-/* Custom Minimalist Clean Underline Inputs matching screenshots */
-.ptsp-input {
+/* Dark mode form helpers */
+.dark label {
+  color: #cbd5e1;
+}
+
+.dark input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Submit Button */
+.ptsp-btn-submit {
   width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1.5px solid #e2e8f0;
-  padding: 0.5rem 0.25rem;
-  font-size: 0.925rem;
-  color: #1e293b;
-  outline: none;
+  height: 3rem;
+  background: linear-gradient(to right, #2d79d6, #1e4480);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.875rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(45, 121, 214, 0.2), 0 4px 6px -4px rgba(45, 121, 214, 0.1);
   transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
-.ptsp-input:focus {
-  border-bottom-color: #6320ee;
-  box-shadow: 0 1px 0 0 #6320ee;
+.ptsp-btn-submit:hover {
+  background: linear-gradient(to right, #2466b8, #17386c);
+  box-shadow: 0 20px 25px -5px rgba(45, 121, 214, 0.25), 0 8px 10px -6px rgba(45, 121, 214, 0.1);
+  transform: translateY(-1px);
 }
 
-.ptsp-input::placeholder {
-  color: #94a3b8;
-  font-style: italic;
-  font-size: 0.85rem;
-}
-
-/* Custom Textarea */
-.ptsp-textarea {
-  width: 100%;
-  background: #fafbfe;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 0.75rem;
-  padding: 0.75rem;
-  font-size: 0.925rem;
-  color: #1e293b;
-  outline: none;
-  transition: all 0.2s ease-in-out;
-  resize: vertical;
-}
-
-.ptsp-textarea:focus {
-  border-color: #6320ee;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(99, 32, 238, 0.1);
+.ptsp-btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* Mascot floating animation */

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar, { PTSP_SERVICES } from '@/components/Sidebar';
 import Header from '@/components/Header';
 import MascotBot from '@/components/ui/MascotBot';
@@ -27,6 +27,34 @@ export default function PtspHomePage() {
   const [progress, setProgress] = useState(0);
   const [submissionSuccess, setSubmissionSuccess] = useState<SubmissionResponse | null>(null);
   const [trackerInitialCode, setTrackerInitialCode] = useState<string>('');
+  const [isDark, setIsDark] = useState(false);
+
+  // Initialize theme from localStorage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('ptsp_theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setIsDark(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDark(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const handleToggleDark = () => {
+    setIsDark((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('ptsp_theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('ptsp_theme', 'light');
+      }
+      return next;
+    });
+  };
 
   const currentServiceMeta = PTSP_SERVICES.find((s) => s.id === activeService);
   const CurrentIcon = currentServiceMeta?.icon;
@@ -42,8 +70,8 @@ export default function PtspHomePage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#f6f8fc]">
-      {/* Left Sidebar */}
+    <div className="h-screen w-screen flex overflow-hidden bg-[#f1f5fa] dark:bg-[#0a1120] text-slate-800 dark:text-slate-100 transition-colors duration-200">
+      {/* Left Sidebar (Independent scrolling) */}
       <Sidebar
         activeService={activeService}
         onSelectService={(id) => {
@@ -54,14 +82,16 @@ export default function PtspHomePage() {
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />
 
-      {/* Main Container */}
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* Main Container (Independent scrolling, clean without visible scrollbar) */}
+      <div className="flex-1 h-screen overflow-y-auto no-scrollbar flex flex-col min-w-0">
         <Header
           onOpenMobileSidebar={() => setMobileSidebarOpen(true)}
           onOpenTracker={() => {
             setActiveService('tracker');
             setProgress(0);
           }}
+          isDark={isDark}
+          onToggleDark={handleToggleDark}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full">
@@ -70,35 +100,35 @@ export default function PtspHomePage() {
             <TrackerView initialToken={trackerInitialCode} />
           ) : (
             /* Main Form Card */
-            <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200/80 relative">
+            <div className="bg-white dark:bg-[#121d33] rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200/80 dark:border-[#1e3052] transition-colors duration-200 relative">
               {/* Form Header */}
-              <div className="flex items-center justify-between pb-8 mb-8 border-b border-slate-100">
+              <div className="flex items-center justify-between pb-8 mb-8 border-b border-slate-100 dark:border-slate-800/80">
                 <div className="flex items-center gap-4">
                   <div
-                    className="w-14 h-14 rounded-2xl bg-white shadow-md border border-slate-100 flex items-center justify-center p-2.5 transition-transform hover:scale-105"
-                    style={{ color: currentServiceMeta?.accent || '#6320ee' }}
+                    className="w-14 h-14 rounded-2xl bg-white dark:bg-[#182744] shadow-md border border-slate-100 dark:border-slate-800 flex items-center justify-center p-2.5 transition-transform hover:scale-105"
+                    style={{ color: currentServiceMeta?.accent || '#2d79d6' }}
                   >
                     {CurrentIcon && <CurrentIcon className="w-8 h-8 stroke-[1.8]" />}
                   </div>
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-black text-slate-800 leading-tight">
+                    <h2 className="text-xl sm:text-2xl font-black text-slate-800 dark:text-slate-100 leading-tight">
                       {currentServiceMeta?.title}
                     </h2>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-[10.5px] font-extrabold uppercase tracking-widest text-[#6320ee]">
+                      <span className="text-[10.5px] font-extrabold uppercase tracking-widest text-[#2d79d6] dark:text-[#60a5fa]">
                         PUSAT PENGAJUAN DIGITAL
                       </span>
-                      <span className="text-slate-300">•</span>
-                      <span className="text-[10px] font-bold text-slate-400">
+                      <span className="text-slate-300 dark:text-slate-700">•</span>
+                      <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">
                         MAN IC Gowa
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Percentage Progress Badge matching screenshot */}
-                <div className="px-3.5 py-1.5 rounded-full bg-purple-50 text-[#6320ee] border border-purple-100/80 flex items-center gap-2 shadow-xs shrink-0">
-                  <span className="w-2 h-2 rounded-full bg-[#6320ee] animate-pulse" />
+                {/* Percentage Progress Badge */}
+                <div className="px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#2d79d6] dark:text-[#60a5fa] border border-blue-100 dark:border-blue-800/60 flex items-center gap-2 shadow-xs shrink-0">
+                  <span className="w-2 h-2 rounded-full bg-[#2d79d6] dark:bg-[#60a5fa] animate-pulse" />
                   <span className="text-xs font-black font-mono">
                     {progress}% Lengkap
                   </span>

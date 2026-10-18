@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Pusat Pelayanan Terpadu Satu Pintu (PTSP) MAN Insan Cendekia Gowa. Layanan terpadu pengajuan izin, peminjaman sarana, legalisir, pengaduan, dan tracking token secara online.',
   icons: {
-    icon: '/acca-logo.png',
+    icon: '/Logo Insan Cendekia.png',
   },
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body className="antialiased selection:bg-[#6320ee] selection:text-white">
+      <body className="antialiased selection:bg-[#2d79d6] selection:text-white">
         {children}
       </body>
     </html>
