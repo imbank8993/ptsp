@@ -28,8 +28,22 @@ export default function PtspHomePage() {
   const [submissionSuccess, setSubmissionSuccess] = useState<SubmissionResponse | null>(null);
   const [trackerInitialCode, setTrackerInitialCode] = useState<string>('');
   const [isDark, setIsDark] = useState(false);
+  const [enabledServices, setEnabledServices] = useState<ServiceId[]>(PTSP_SERVICES.filter((service) => service.id !== 'tracker').map((service) => service.id));
 
   const scrollPosRef = useRef(0);
+
+  useEffect(() => {
+    const apiBase = process.env.NEXT_PUBLIC_API_URL || '';
+    fetch(`${apiBase}/api/ptsp/services`, { cache: 'no-store' })
+      .then((response) => response.json())
+      .then((result) => {
+        if (!result?.ok || !Array.isArray(result.services)) return;
+        const ids = result.services.map((service: { id: ServiceId }) => service.id);
+        setEnabledServices(ids);
+        setActiveService((current) => current === 'tracker' || ids.includes(current) ? current : (ids[0] || 'tracker'));
+      })
+      .catch(() => undefined);
+  }, []);
 
   const openMobileSidebar = useCallback(() => {
     scrollPosRef.current = window.scrollY;
@@ -121,6 +135,7 @@ export default function PtspHomePage() {
       {/* Left Sidebar (Independent scrolling on desktop, slide drawer on mobile) */}
       <Sidebar
         activeService={activeService}
+        visibleServiceIds={enabledServices}
         onSelectService={(id) => {
           setActiveService(id);
           setProgress(0);

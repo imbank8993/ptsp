@@ -12,6 +12,8 @@ export default function WhatsAppButton() {
   // Position state: null initially until mounted to prevent hydration mismatch
   const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFlyingIn, setIsFlyingIn] = useState(true);
 
   // References for drag calculation
   const dragStartRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
@@ -26,7 +28,7 @@ export default function WhatsAppButton() {
   // Set default initial position at bottom-right on mount
   useEffect(() => {
     const updateDefaultPosition = () => {
-      const btnSize = 52;
+      const btnSize = 64;
       const margin = 16;
       const x = Math.max(12, window.innerWidth - btnSize - margin);
       const y = Math.max(80, window.innerHeight - btnSize - margin - 20);
@@ -42,8 +44,12 @@ export default function WhatsAppButton() {
     };
 
     updateDefaultPosition();
+    const flightTimer = window.setTimeout(() => setIsFlyingIn(false), 3800);
     window.addEventListener('resize', updateDefaultPosition);
-    return () => window.removeEventListener('resize', updateDefaultPosition);
+    return () => {
+      window.clearTimeout(flightTimer);
+      window.removeEventListener('resize', updateDefaultPosition);
+    };
   }, []);
 
   const handlePointerDown = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
@@ -121,6 +127,8 @@ export default function WhatsAppButton() {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
+      onPointerEnter={() => setIsHovered(true)}
+      onPointerLeave={() => setIsHovered(false)}
       style={{
         transform: position
           ? `translate3d(${position.x}px, ${position.y}px, 0)`
@@ -128,19 +136,52 @@ export default function WhatsAppButton() {
         touchAction: 'none',
         visibility: position ? 'visible' : 'hidden',
       }}
-      className={`fixed top-0 left-0 z-50 w-13 h-13 rounded-full bg-[#25D366] hover:bg-[#20ba59] active:bg-[#1da850] text-white flex items-center justify-center shadow-xl shadow-[#25D366]/30 border-2 border-white/80 dark:border-slate-800 select-none ${
+      className={`fixed top-0 left-0 z-50 w-16 h-16 bg-transparent text-white flex items-center justify-center select-none ${
         isDragging
-          ? 'cursor-grabbing scale-105 shadow-2xl transition-none'
-          : 'cursor-grab hover:scale-110 active:scale-95 transition-transform duration-200'
+          ? 'cursor-grabbing transition-none'
+          : 'cursor-grab active:opacity-80 transition-opacity duration-200'
       }`}
       title="Geser untuk memindahkan, ketuk untuk chat Helpdesk WhatsApp"
       aria-label="Hubungi Helpdesk PTSP via WhatsApp"
     >
-      <svg
-        className="w-7 h-7 fill-current pointer-events-none drop-shadow-xs"
-        viewBox="0 0 24 24"
+      <span
+        className={`absolute right-full mr-2 whitespace-nowrap rounded-lg bg-[var(--ptsp-primary)] px-3 py-1.5 text-xs font-semibold text-white shadow-lg transition-all duration-200 pointer-events-none ${
+          isHovered && !isDragging ? 'translate-x-0 opacity-100' : 'translate-x-1 opacity-0'
+        }`}
+        aria-hidden="true"
       >
-        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+        Hubungi kami
+      </span>
+      <svg
+        className={`w-16 h-16 pointer-events-none drop-shadow-[0_2px_3px_rgba(15,23,42,0.65)] ${isFlyingIn && position && !isDragging ? 'animate-owl-arrival' : ''}`}
+        viewBox="0 0 100 110"
+        fill="none"
+        aria-hidden="true"
+      >
+        {/* Floating full-body owl: ear tufts, facial discs, wings, and talons */}
+        <ellipse cx="50" cy="105" rx="16" ry="2.5" fill="#0f172a" fillOpacity="0.22" />
+        <g className={isFlyingIn && position && !isDragging ? 'owl-flight-body' : ''} stroke="#0f172a" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
+          <path d="M43 80h6v15h-6zm8 0h6v15h-6z" fill="var(--ptsp-primary)" />
+          <path d="m43 93-3 4 5-1 2 3 2-5m2 0 2 5 2-3 5 1-3-4" fill="#f4b942" />
+          <path d="m43 84-7 5 7 1m14-6 7 5-7 1" fill="var(--ptsp-primary-hover)" />
+          <path d="M35 53c-6 2-10 8-10 17v12c0 6 4 10 10 10h30c6 0 10-4 10-10V70c0-9-4-15-10-17" fill="var(--ptsp-primary)" />
+          <g className={isFlyingIn && position && !isDragging ? 'owl-wing owl-wing-left owl-wing-flapping' : 'owl-wing owl-wing-left owl-wing-rest'}>
+            <path d="M30 61c-6-3-12-3-16 1 3 1 5 3 5 5-4 1-6 4-5 7 4-2 8-1 11 2-1 4 0 7 3 9 4-5 7-8 11-9Z" fill="var(--ptsp-primary)" />
+            <path d="m19 66 11 9m-9-1 8 6" fill="none" stroke="white" strokeWidth="1.8" />
+          </g>
+          <g className={isFlyingIn && position && !isDragging ? 'owl-wing owl-wing-right owl-wing-flapping' : 'owl-wing owl-wing-right owl-wing-rest'}>
+            <path d="M70 61c6-3 12-3 16 1-3 1-5 3-5 5 4 1 6 4 5 7-4-2-8-1-11 2 1 4 0 7-3 9-4-5-7-8-11-9Z" fill="var(--ptsp-primary)" />
+            <path d="m81 66-11 9m9-1-8 6" fill="none" stroke="white" strokeWidth="1.8" />
+          </g>
+          <path d="M29 33 27 20l13 8c6-2 14-2 20 0l13-8-2 13c4 5 6 11 6 19 0 16-11 25-27 25S23 68 23 52c0-8 2-14 6-19Z" fill="white" />
+          <path d="M29 33 27 20l13 8c3-1 6-1.5 10-1.5V78c-16 0-27-9-27-26 0-8 2-14 6-19Z" fill="var(--ptsp-primary-light)" stroke="none" />
+          <path d="M29 51c0-7 5-12 12-12s12 5 12 12-5 13-12 13-12-6-12-13Zm18 0c0-7 5-12 12-12s12 5 12 12-5 13-12 13-12-6-12-13Z" fill="var(--ptsp-primary)" />
+          <ellipse className={!isFlyingIn && !isDragging ? 'owl-blink' : ''} cx="41" cy="51" rx="5" ry="5" fill="white" />
+          <ellipse className={!isFlyingIn && !isDragging ? 'owl-blink' : ''} cx="59" cy="51" rx="5" ry="5" fill="white" />
+          <circle className={!isFlyingIn && !isDragging ? 'owl-blink' : ''} cx="42" cy="51" r="2" fill="#0f172a" stroke="none" />
+          <circle className={!isFlyingIn && !isDragging ? 'owl-blink' : ''} cx="58" cy="51" r="2" fill="#0f172a" stroke="none" />
+          <path d="m50 55-4 6h8l-4-6Z" fill="#f4b942" />
+        </g>
       </svg>
     </button>
   );

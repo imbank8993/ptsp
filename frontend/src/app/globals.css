@@ -272,6 +272,78 @@ input, button, select, textarea {
   animation: float 4s ease-in-out infinite;
 }
 
+@keyframes owl-arrival {
+  0% { transform: translate3d(-110vw, -24vh, 0); }
+  18% { transform: translate3d(-86vw, -31vh, 0); }
+  38% { transform: translate3d(-61vw, -20vh, 0); }
+  58% { transform: translate3d(-39vw, -28vh, 0); }
+  78% { transform: translate3d(-18vw, -17vh, 0); }
+  92% { transform: translate3d(-5vw, -7vh, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.animate-owl-arrival {
+  animation: owl-arrival 3.8s cubic-bezier(.36,.05,.24,1) both;
+  will-change: transform;
+}
+
+.owl-flight-body {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: owl-body-bob 520ms ease-in-out infinite alternate;
+}
+
+@keyframes owl-body-bob {
+  from { transform: translateY(1px) rotate(-2deg); }
+  to { transform: translateY(-2px) rotate(2deg); }
+}
+
+.owl-wing {
+  transform-box: view-box;
+  transform-origin: 50% 64%;
+}
+
+.owl-wing-left { transform-origin: 30px 64px; }
+.owl-wing-right { transform-origin: 70px 64px; }
+.owl-wing-rest.owl-wing-left { transform: translateX(12px) rotate(7deg) scale(.7,.9); }
+.owl-wing-rest.owl-wing-right { transform: translateX(-12px) rotate(-7deg) scale(.7,.9); }
+
+@keyframes owl-wing-flap-left {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  38% { transform: rotate(-62deg) scaleY(.78); }
+  68% { transform: rotate(12deg) scaleY(1.08); }
+}
+
+@keyframes owl-wing-flap-right {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  38% { transform: rotate(62deg) scaleY(.78); }
+  68% { transform: rotate(-12deg) scaleY(1.08); }
+}
+
+.owl-wing-flapping.owl-wing-left { animation: owl-wing-flap-left 430ms cubic-bezier(.45,0,.55,1) infinite; }
+.owl-wing-flapping.owl-wing-right { animation: owl-wing-flap-right 430ms cubic-bezier(.45,0,.55,1) infinite; }
+
+@keyframes owl-eye-blink {
+  0%, 95%, 100% { transform: scaleY(1); }
+  97% { transform: scaleY(0.12); }
+}
+
+.owl-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: owl-eye-blink 4.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-owl-arrival,
+  .owl-wing-flapping,
+  .owl-flight-body,
+  .owl-blink {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+}
+
 /* Eye blink animation */
 @keyframes blink {
   0%, 90%, 100% {

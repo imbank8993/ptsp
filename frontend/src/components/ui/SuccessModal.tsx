@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Check,
   Copy,
@@ -9,11 +9,10 @@ import {
   ArrowRight,
   Download,
   ShieldCheck,
-  Calendar,
   User,
   FileText,
   Clock,
-  Sparkles,
+  X,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SubmissionResponse } from '@/types';
@@ -26,7 +25,6 @@ interface SuccessModalProps {
 
 export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModalProps) {
   const [copiedCode, setCopiedCode] = useState(false);
-  const [copiedToken, setCopiedToken] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
@@ -50,12 +48,6 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
     navigator.clipboard.writeText(data.short_code);
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2000);
-  };
-
-  const handleCopyToken = () => {
-    navigator.clipboard.writeText(data.tracking_token);
-    setCopiedToken(true);
-    setTimeout(() => setCopiedToken(false), 2000);
   };
 
   const formattedDate = new Date().toLocaleDateString('id-ID', {
@@ -83,7 +75,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
     try {
       const canvas = document.createElement('canvas');
       const width = 1200;
-      const height = 740;
+      const height = 680;
       canvas.width = width;
       canvas.height = height;
       const ctx = canvas.getContext('2d');
@@ -184,7 +176,6 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
         { label: 'Nama Pemohon', value: data.applicant_name || 'Pemohon PTSP' },
         { label: 'Jenis Layanan', value: data.service_type },
         { label: 'Waktu Pengajuan', value: `${formattedDate}, ${formattedTime}` },
-        { label: 'Token UUID', value: data.tracking_token },
         { label: 'Status Awal', value: 'BERKAS DITERIMA (MENUNGGU VERIFIKASI ADMIN)' },
       ];
 
@@ -204,8 +195,8 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
         ctx.fillText(f.label, 60, rowY + 28);
 
         ctx.fillStyle = '#0f172a';
-        ctx.font = idx === 3 ? 'bold 14px monospace' : (idx === 4 ? 'bold 15px sans-serif' : 'bold 17px sans-serif');
-        if (idx === 4) ctx.fillStyle = '#059669'; // Green status
+        ctx.font = idx === 3 ? 'bold 15px sans-serif' : 'bold 17px sans-serif';
+        if (idx === 3) ctx.fillStyle = '#059669'; // Green status
 
         // Truncate long value if needed
         const val = f.value.length > 68 ? f.value.substring(0, 65) + '...' : f.value;
@@ -214,7 +205,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
 
       // Digital Stamp in bottom right
       ctx.save();
-      ctx.translate(width - 200, 650);
+      ctx.translate(width - 200, 600);
       ctx.strokeStyle = '#2563eb';
       ctx.lineWidth = 3;
       ctx.beginPath();
@@ -235,7 +226,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
       ctx.textAlign = 'left';
       ctx.fillStyle = '#94a3b8';
       ctx.font = 'italic 13px sans-serif';
-      ctx.fillText('* Simpan kartu ini sebagai bukti resmi. Gunakan Kode Lacak untuk memantau proses di ptsp.icgowa.sch.id', 40, 670);
+      ctx.fillText('* Gunakan Kode Lacak untuk memantau proses permohonan.', 40, 640);
 
       // Outer Card Border
       ctx.strokeStyle = '#cbd5e1';
@@ -258,6 +249,15 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/70 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
       <div className="relative w-full max-w-xl my-auto bg-white dark:bg-[#111c33] rounded-3xl shadow-2xl border border-slate-100 dark:border-[#1e3052] overflow-hidden p-5 sm:p-7 text-center animate-in zoom-in-95 duration-200">
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Tutup"
+          title="Tutup"
+          className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+        >
+          <X className="h-5 w-5" />
+        </button>
         {/* Top Success Badge */}
         <div className="flex items-center justify-center gap-2 mb-2">
           <div className="w-10 h-10 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-inner">
@@ -274,7 +274,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
         </div>
 
         <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-          Berikut adalah kartu tanda bukti identitas pengajuan Anda. Anda dapat menyalin kode lacak maupun mengunduh kartu ini sebagai gambar bukti.
+          Simpan kode lacak untuk memantau permohonan.
         </p>
 
         {/* ================= OFFICIAL RECEIPT CARD PREVIEW ================= */}
@@ -308,7 +308,7 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
           <div className="my-3 p-3 bg-blue-50/70 dark:bg-blue-950/40 rounded-xl border border-blue-100 dark:border-blue-900/60 flex items-center justify-between gap-2">
             <div>
               <p className="text-[9.5px] font-bold text-[#005599] dark:text-[#4da6ff] uppercase tracking-wider">
-                Kode Lacak (Short Code)
+                Kode Lacak
               </p>
               <p className="text-xl sm:text-2xl font-black text-[#005599] dark:text-[#4da6ff] font-mono tracking-widest">
                 {data.short_code}
@@ -366,27 +366,6 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
               </span>
             </div>
 
-            {/* Token UUID Row with Copy */}
-            <div className="flex items-center justify-between py-1 pt-1.5">
-              <div className="min-w-0 pr-2">
-                <p className="text-[9.5px] font-bold text-slate-400 uppercase">Token UUID</p>
-                <p className="text-[10px] font-mono text-slate-600 dark:text-slate-400 truncate">
-                  {data.tracking_token}
-                </p>
-              </div>
-              <button
-                onClick={handleCopyToken}
-                type="button"
-                className="p-1 rounded-md text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition"
-                title="Salin Token UUID"
-              >
-                {copiedToken ? (
-                  <CheckCheck className="w-3.5 h-3.5 text-emerald-600" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5" />
-                )}
-              </button>
-            </div>
           </div>
         </div>
 
@@ -424,14 +403,6 @@ export default function SuccessModal({ data, onClose, onTrackNow }: SuccessModal
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
 
-          {/* Close button */}
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-full py-1.5 text-xs font-semibold text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition"
-          >
-            Tutup & Buat Permohonan Baru
-          </button>
         </div>
       </div>
     </div>

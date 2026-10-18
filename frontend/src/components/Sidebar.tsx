@@ -19,6 +19,7 @@ import { ServiceId } from '@/types';
 
 interface SidebarProps {
   activeService: ServiceId;
+  visibleServiceIds?: ServiceId[];
   onSelectService: (id: ServiceId) => void;
   mobileOpen: boolean;
   onCloseMobile: () => void;
@@ -84,6 +85,7 @@ export const PTSP_SERVICES = [
 
 export default function Sidebar({
   activeService,
+  visibleServiceIds,
   onSelectService,
   mobileOpen,
   onCloseMobile,
@@ -122,7 +124,7 @@ export default function Sidebar({
 
       {/* Services List with independent smooth scrolling and clean compact gap */}
       <div className="flex-1 overflow-y-auto no-scrollbar px-3 py-3 space-y-1">
-        {PTSP_SERVICES.map((item) => {
+        {PTSP_SERVICES.filter((item) => item.id === 'tracker' || !visibleServiceIds || visibleServiceIds.includes(item.id)).map((item) => {
           const Icon = item.icon;
           const isActive = activeService === item.id;
           const isTracker = item.id === 'tracker';

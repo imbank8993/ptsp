@@ -32,8 +32,8 @@ export class PtspController {
   ) {}
 
   @Get('services')
-  getServices() {
-    return {
+  async getServices() {
+    const result = {
       ok: true,
       services: [
         {
@@ -108,6 +108,9 @@ export class PtspController {
         },
       ],
     };
+    const config = await this.ptspService.getPublicConfig();
+    result.services = result.services.filter((service) => config.enabledServices.includes(service.id));
+    return result;
   }
 
   /**
@@ -139,61 +142,71 @@ export class PtspController {
 
   // 1. SOSIALISASI
   @Post('submit/sosialisasi')
-  submitSosialisasi(@Body() dto: SubmitSosialisasiDto) {
+  async submitSosialisasi(@Body() dto: SubmitSosialisasiDto) {
+    await this.ptspService.assertServiceEnabled('sosialisasi');
     return this.ptspService.submitSosialisasi(dto);
   }
 
   // 2. PEMINJAMAN SARANA
   @Post('submit/peminjaman-sarana')
-  submitPeminjamanSarana(@Body() dto: SubmitPeminjamanSaranaDto) {
+  async submitPeminjamanSarana(@Body() dto: SubmitPeminjamanSaranaDto) {
+    await this.ptspService.assertServiceEnabled('peminjaman-sarana');
     return this.ptspService.submitPeminjamanSarana(dto);
   }
 
   // 3. IZIN PENELITIAN
   @Post('submit/izin-penelitian')
-  submitIzinPenelitian(@Body() dto: SubmitIzinPenelitianDto) {
+  async submitIzinPenelitian(@Body() dto: SubmitIzinPenelitianDto) {
+    await this.ptspService.assertServiceEnabled('izin-penelitian');
     return this.ptspService.submitIzinPenelitian(dto);
   }
 
   // 4. LAYANAN LEGALISIR
   @Post('submit/legalisir')
-  submitLegalisir(@Body() dto: SubmitLegalisirDto) {
+  async submitLegalisir(@Body() dto: SubmitLegalisirDto) {
+    await this.ptspService.assertServiceEnabled('legalisir');
     return this.ptspService.submitLegalisir(dto);
   }
 
   // 5. GANTI IJAZAH HILANG
   @Post('submit/pengganti-ijazah')
-  submitPenggantiIjazah(@Body() dto: SubmitPenggantiIjazahDto) {
+  async submitPenggantiIjazah(@Body() dto: SubmitPenggantiIjazahDto) {
+    await this.ptspService.assertServiceEnabled('ganti-ijazah');
     return this.ptspService.submitPenggantiIjazah(dto);
   }
 
   // 6. PERMOHONAN MAGANG
   @Post('submit/izin-magang')
-  submitIzinMagang(@Body() dto: SubmitIzinMagangDto) {
+  async submitIzinMagang(@Body() dto: SubmitIzinMagangDto) {
+    await this.ptspService.assertServiceEnabled('izin-magang');
     return this.ptspService.submitIzinMagang(dto);
   }
 
   // 7. MUTASI SISWA
   @Post('submit/mutasi-siswa')
-  submitMutasiSiswa(@Body() dto: SubmitMutasiSiswaDto) {
+  async submitMutasiSiswa(@Body() dto: SubmitMutasiSiswaDto) {
+    await this.ptspService.assertServiceEnabled('mutasi-siswa');
     return this.ptspService.submitMutasiSiswa(dto);
   }
 
   // 8. PENGADUAN MASYARAKAT
   @Post('submit/pengaduan')
-  submitPengaduan(@Body() dto: SubmitPengaduanDto) {
+  async submitPengaduan(@Body() dto: SubmitPengaduanDto) {
+    await this.ptspService.assertServiceEnabled('pengaduan');
     return this.ptspService.submitPengaduan(dto);
   }
 
   // 9. IZIN SISWA ASRAMA
   @Post('submit/izin-siswa')
-  submitIzinSiswa(@Body() dto: SubmitIzinSiswaDto) {
+  async submitIzinSiswa(@Body() dto: SubmitIzinSiswaDto) {
+    await this.ptspService.assertServiceEnabled('izin-siswa');
     return this.ptspService.submitIzinSiswa(dto);
   }
 
   // 10. BUKU TAMU DIGITAL
   @Post('submit/buku-tamu')
-  submitBukuTamu(@Body() dto: SubmitBukuTamuDto) {
+  async submitBukuTamu(@Body() dto: SubmitBukuTamuDto) {
+    await this.ptspService.assertServiceEnabled('buku-tamu');
     return this.ptspService.submitBukuTamu(dto);
   }
 }

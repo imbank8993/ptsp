@@ -30,6 +30,86 @@ export class PtspService {
 
   constructor(private readonly db: DatabaseService) {}
 
+  async getPublicConfig() {
+    const row = await this.db.queryOne<{ value: string }>(
+      'SELECT value FROM site_settings WHERE key = $1 LIMIT 1', ['ptsp_service_config'],
+    );
+    const defaults = {
+      enabledServices: ['buku-tamu', 'sosialisasi', 'izin-siswa', 'peminjaman-sarana', 'izin-penelitian', 'legalisir', 'ganti-ijazah', 'izin-magang', 'mutasi-siswa', 'pengaduan'],
+      waEnabled: true,
+      waMessageTemplate: 'Halo {nama}, permohonan {layanan} Anda berhasil diterima. Kode lacak: {kode_lacak}. Gunakan kode tersebut untuk memantau status permohonan.',
+    };
+    try {
+      const config = row?.value ? JSON.parse(row.value) : {};
+      return {
+        enabledServices: Array.isArray(config.enabledServices) ? config.enabledServices : defaults.enabledServices,
+        waEnabled: config.waEnabled !== false,
+        waMessageTemplate: typeof config.waMessageTemplate === 'string' ? config.waMessageTemplate : defaults.waMessageTemplate,
+      };
+    } catch { return defaults; }
+  }
+
+  async assertServiceEnabled(serviceId: string) {
+    const config = await this.getPublicConfig();
+    if (!config.enabledServices.includes(serviceId)) {
+      throw new BadRequestException('Layanan ini sedang tidak tersedia.');
+    }
+  }
+
+  private async completeSubmission(dto: any, tracking_token: string, short_code: string, service_type: string, message: string): Promise<SubmissionResult> {
+    await this.sendApplicantWhatsApp(dto, tracking_token, short_code, service_type);
+    return { ok: true, tracking_token, short_code, service_type, created_at: new Date().toISOString(), message };
+  }
+
+  private async sendApplicantWhatsApp(dto: any, tracking_token: string, short_code: string, service_type: string) {
+    const phone = String(dto.wa || '').trim();
+    if (!phone || /^0+$/.test(phone)) return;
+    try {
+      const config = await this.getPublicConfig();
+      if (!config.waEnabled) return;
+      const settings = await this.db.query<{ key: string; value: string }>(
+        'SELECT key, value FROM site_settings WHERE key = ANY($1::text[])',
+        [['wa_provider_ptsp', 'wa_token_ptsp', 'wa_accounts_v2_ptsp', 'wa_api_token', 'wa_provider']],
+      );
+      const map = Object.fromEntries(settings.map((item) => [item.key, item.value]));
+      const provider = map.wa_provider_ptsp || map.wa_provider || 'fonnte';
+      let token = map.wa_token_ptsp || map.wa_api_token;
+      if (map.wa_accounts_v2_ptsp) {
+        try {
+          const accounts = JSON.parse(map.wa_accounts_v2_ptsp);
+          token = accounts.find((account: any) => account.isSelected)?.token || token;
+        } catch { /* Fall back to the compatible single-token setting. */ }
+      }
+      if (!token || provider === 'baileys') {
+        this.logger.warn(`Konfirmasi WA PTSP belum terkirim: provider ${provider} tidak menyediakan token yang dapat dipakai backend PTSP.`);
+        return;
+      }
+      const name = String(dto.nama || dto.nama_siswa || 'Pemohon');
+      const message = config.waMessageTemplate
+        .replaceAll('{nama}', name)
+        .replaceAll('{layanan}', service_type)
+        .replaceAll('{kode_lacak}', short_code);
+      const target = phone.replace(/[\s\-+]/g, '').replace(/^0/, '62');
+      let response: Response;
+      if (provider === 'watzap') {
+        response = await fetch('https://www.watzap.me/api/send', { method: 'POST', headers: { Authorization: token, 'Content-Type': 'application/json' }, body: JSON.stringify({ number: target, message }), signal: AbortSignal.timeout(10000) });
+      } else if (provider === 'ultramsg') {
+        response = await fetch(`https://api.ultramsg.com/instance/${token}/messages/chat`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token, to: target, body: message }), signal: AbortSignal.timeout(10000) });
+      } else {
+        response = await fetch('https://api.fonnte.com/send', { method: 'POST', headers: { Authorization: token, 'Content-Type': 'application/json' }, body: JSON.stringify({ target, message }), signal: AbortSignal.timeout(10000) });
+      }
+      const detail = await response.text();
+      const sent = response.ok && (provider === 'fonnte' ? /true|sent|pending|kirim/i.test(detail) : /true|success|sent/i.test(detail));
+      await this.db.query(
+        `INSERT INTO ptsp_wa_log (tracking_id, short_code, no_wa, service_type, status_changed, message_sent, wa_sent, wa_sent_at, wa_response, retry_count, created_at) VALUES ($1,$2,$3,$4,1,$5,$6,CASE WHEN $6 THEN timezone('utc'::text, now()) ELSE NULL END,$7,0,timezone('utc'::text, now()))`,
+        [tracking_token, short_code, phone, service_type, message, sent, detail.slice(0, 2000)],
+      );
+      if (!sent) this.logger.warn(`Konfirmasi WA ${short_code} gagal: ${detail.slice(0, 200)}`);
+    } catch (error: any) {
+      this.logger.warn(`Konfirmasi WA ${short_code} gagal: ${error.message}`);
+    }
+  }
+
   /**
    * Generates a collision-resistant human-readable short code (e.g. PTSP-A8X92K)
    */
@@ -95,14 +175,7 @@ export class PtspService {
       await client.query(sqlTrack, [tracking_token, short_code, dto.wa, service_type, table_name]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Pengajuan Sosialisasi berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Pengajuan Sosialisasi berhasil dikirim!');
   }
 
   // 2. PEMINJAMAN SARANA
@@ -142,14 +215,7 @@ export class PtspService {
       await client.query(sqlTrack, [tracking_token, short_code, dto.wa, service_type, table_name]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Peminjaman Sarana berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Peminjaman Sarana berhasil dikirim!');
   }
 
   // 3. IZIN PENELITIAN
@@ -190,14 +256,7 @@ export class PtspService {
       await client.query(sqlTrack, [tracking_token, short_code, dto.wa, service_type, table_name]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Izin Penelitian berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Izin Penelitian berhasil dikirim!');
   }
 
   // 4. LAYANAN LEGALISIR
@@ -236,14 +295,7 @@ export class PtspService {
       await client.query(sqlTrack, [tracking_token, short_code, dto.wa, service_type, table_name]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Layanan Legalisir berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Layanan Legalisir berhasil dikirim!');
   }
 
   // 5. GANTI IJAZAH HILANG
@@ -289,14 +341,7 @@ export class PtspService {
       await client.query(sqlTrack, [tracking_token, short_code, dto.wa, service_type, table_name]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Pengganti Ijazah Hilang berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Pengganti Ijazah Hilang berhasil dikirim!');
   }
 
   // 6. PERMOHONAN MAGANG
@@ -337,14 +382,7 @@ export class PtspService {
       await client.query(sqlTrack, [tracking_token, short_code, dto.wa, service_type, table_name]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Izin Magang berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Izin Magang berhasil dikirim!');
   }
 
   // 7. MUTASI SISWA
@@ -391,14 +429,7 @@ export class PtspService {
       await client.query(sqlTrack, [tracking_token, short_code, dto.wa, service_type, table_name]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Mutasi Keluar Siswa berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Mutasi Keluar Siswa berhasil dikirim!');
   }
 
   // 8. PENGADUAN MASYARAKAT
@@ -443,14 +474,7 @@ export class PtspService {
       ]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Laporan Pengaduan Masyarakat berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Laporan Pengaduan Masyarakat berhasil dikirim!');
   }
 
   // 9. IZIN SISWA ASRAMA
@@ -498,14 +522,7 @@ export class PtspService {
       ]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Permohonan Izin Siswa Asrama berhasil dikirim!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Permohonan Izin Siswa Asrama berhasil dikirim!');
   }
 
   // 10. BUKU TAMU DIGITAL
@@ -550,13 +567,6 @@ export class PtspService {
       ]);
     });
 
-    return {
-      ok: true,
-      tracking_token,
-      short_code,
-      service_type,
-      created_at: new Date().toISOString(),
-      message: 'Catatan Kunjungan Buku Tamu berhasil disimpan!',
-    };
+    return this.completeSubmission(dto, tracking_token, short_code, service_type, 'Catatan Kunjungan Buku Tamu berhasil disimpan!');
   }
 }
