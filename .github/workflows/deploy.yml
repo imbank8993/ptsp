@@ -42,15 +42,15 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            # Pastikan file backend/.env ada
-            if [ ! -f "backend/.env" ]; then
-              echo "⚠️ File backend/.env belum ditemukan! Menyalin dari backend/.env.example..."
+            # Pastikan file backend/.env ada dan up-to-date
+            if [ ! -f "backend/.env" ] || grep -q "your_cloudflare_r2" "backend/.env" || grep -q "password@host" "backend/.env"; then
+              echo "⚙️ Memperbarui konfigurasi backend/.env dari backend/.env.example..."
               cp backend/.env.example backend/.env
             fi
 
             echo "🐳 [3/5] Build dan restart container Docker (Anti-Cache & Zero-Downtime)..."
             BUILD_TIMESTAMP=$(date +%s) docker compose build
-            docker compose up -d --remove-orphans
+            docker compose up -d --force-recreate --remove-orphans
 
             echo "🧹 [4/5] Membersihkan cache Docker..."
             docker image prune -f
