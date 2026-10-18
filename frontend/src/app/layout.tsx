@@ -1,13 +1,5 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
 import './globals.css';
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-poppins',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'PTSP MAN Insan Cendekia Gowa',
@@ -24,8 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" suppressHydrationWarning className={poppins.variable}>
+    <html lang="id" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -44,7 +42,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${poppins.className} antialiased selection:bg-[#2B60DE] selection:text-white`}>
+      <body className="antialiased selection:bg-[#2B60DE] selection:text-white">
         {children}
       </body>
     </html>
