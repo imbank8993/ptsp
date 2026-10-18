@@ -168,39 +168,6 @@ export default function Sidebar({
           );
         })}
       </div>
-
-      {/* Footer with Linked Icon Badges Only (no texts, clean minimal design) */}
-      <div className="p-3 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-center gap-3 shrink-0">
-        {/* Logo Insan Cendekia -> icgowa.sch.id */}
-        <a
-          href="https://icgowa.sch.id"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Kunjungi Portal Resmi MAN Insan Cendekia Gowa (icgowa.sch.id)"
-          className="w-10 h-10 rounded-xl bg-slate-50 hover:bg-blue-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 p-1.5 flex items-center justify-center border border-slate-200/80 dark:border-slate-700 shadow-xs hover:shadow-sm hover:border-[#2B60DE]/50 transition-all duration-200 group cursor-pointer"
-        >
-          <img
-            src="/Logo Insan Cendekia.png"
-            alt="MAN IC Gowa"
-            className="w-full h-full object-contain transition-transform group-hover:scale-110"
-          />
-        </a>
-
-        {/* Logo ACCA (Kecil) -> acca.icgowa.sch.id */}
-        <a
-          href="https://acca.icgowa.sch.id"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Kunjungi Portal ACCA IC Gowa (acca.icgowa.sch.id)"
-          className="w-10 h-10 rounded-xl bg-slate-50 hover:bg-blue-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 p-1.5 flex items-center justify-center border border-slate-200/80 dark:border-slate-700 shadow-xs hover:shadow-sm hover:border-[#2B60DE]/50 transition-all duration-200 group cursor-pointer"
-        >
-          <img
-            src="/logo-sidebar-kecil.png"
-            alt="ACCA IC Gowa"
-            className="w-full h-full object-contain transition-transform group-hover:scale-110"
-          />
-        </a>
-      </div>
     </div>
   );
 
