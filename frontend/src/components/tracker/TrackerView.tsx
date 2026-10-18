@@ -56,7 +56,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
       {/* Search Card */}
       <div className="bg-white dark:bg-[#121d33] rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80 dark:border-[#1e3052] transition-colors duration-200">
         <div className="flex items-center gap-2.5 sm:gap-3 mb-4">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-[#6395EE] dark:text-[#7baaf5] flex items-center justify-center border border-blue-100 dark:border-blue-900/50 shadow-sm shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-[#2B60DE] dark:text-[#5c8cf0] flex items-center justify-center border border-blue-100 dark:border-blue-900/50 shadow-sm shrink-0">
             <QrCode className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />
           </div>
           <div>
@@ -83,13 +83,13 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Contoh: PTSP-K8J29A atau token UUID"
-              className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-[#0e172a] border border-slate-200 dark:border-[#1e3052] rounded-2xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:border-[#6395EE] focus:bg-white dark:focus:bg-[#10192d] focus:ring-4 focus:ring-blue-100/50 dark:focus:ring-blue-900/30 transition uppercase tracking-wider"
+              className="w-full pl-11 pr-4 py-3.5 bg-slate-50 dark:bg-[#0e172a] border border-slate-200 dark:border-[#1e3052] rounded-2xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:border-[#2B60DE] focus:bg-white dark:focus:bg-[#10192d] focus:ring-4 focus:ring-blue-100/50 dark:focus:ring-blue-900/30 transition uppercase tracking-wider"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3.5 bg-[#6395EE] hover:bg-[#4d82e4] text-white font-extrabold text-xs sm:text-sm rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
+            className="px-6 py-3.5 bg-[#2B60DE] hover:bg-[#2451be] text-white font-extrabold text-xs sm:text-sm rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
           >
             {loading ? (
               <RefreshCw className="w-4 h-4 animate-spin" />
@@ -118,7 +118,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
                 <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                   Jenis Layanan:
                 </span>
-                <span className="text-xs font-black text-[#6395EE] dark:text-[#7baaf5] bg-blue-50 dark:bg-blue-950/60 px-2.5 py-0.5 rounded-lg border border-blue-100 dark:border-blue-900/50">
+                <span className="text-xs font-black text-[#2B60DE] dark:text-[#5c8cf0] bg-blue-50 dark:bg-blue-950/60 px-2.5 py-0.5 rounded-lg border border-blue-100 dark:border-blue-900/50">
                   {data.service_type}
                 </span>
               </div>
@@ -171,7 +171,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
           <div>
             <div className="flex justify-between items-center text-xs font-bold mb-2">
               <span className="text-slate-600 dark:text-slate-400">Progres Permohonan</span>
-              <span className="text-[#6395EE] dark:text-[#7baaf5]">{data.progress_percent}%</span>
+              <span className="text-[#2B60DE] dark:text-[#5c8cf0]">{data.progress_percent}%</span>
             </div>
             <div className="w-full h-3 bg-slate-100 dark:bg-[#0e172a] rounded-full overflow-hidden p-0.5 border border-slate-200/50 dark:border-slate-800">
               <div
@@ -180,7 +180,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
                     ? 'bg-red-500'
                     : data.status_code === 100
                     ? 'bg-emerald-500'
-                    : 'bg-[#6395EE]'
+                    : 'bg-[#2B60DE]'
                 }`}
                 style={{ width: `${Math.max(data.progress_percent, 5)}%` }}
               />
@@ -190,7 +190,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
           {/* Admin Note if available */}
           {data.catatan_admin && (
             <div className="p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50">
-              <p className="text-xs font-bold text-[#6395EE] dark:text-[#7baaf5] uppercase tracking-wider mb-1">
+              <p className="text-xs font-bold text-[#2B60DE] dark:text-[#5c8cf0] uppercase tracking-wider mb-1">
                 Catatan dari Petugas PTSP:
               </p>
               <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium italic">
@@ -219,7 +219,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
                         isCompleted
                           ? 'bg-emerald-500 text-white'
                           : isCurrent
-                          ? 'bg-[#6395EE] text-white animate-pulse'
+                          ? 'bg-[#2B60DE] text-white animate-pulse'
                           : isRejected
                           ? 'bg-red-500 text-white'
                           : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600'
@@ -240,7 +240,7 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
                         <p
                           className={`text-sm font-bold leading-tight ${
                             isCurrent
-                              ? 'text-[#6395EE] dark:text-[#7baaf5]'
+                              ? 'text-[#2B60DE] dark:text-[#5c8cf0]'
                               : isRejected
                               ? 'text-red-600 dark:text-red-400'
                               : isCompleted

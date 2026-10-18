@@ -7,8 +7,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --ptsp-primary: #6395EE;
-  --ptsp-primary-hover: #4d82e4;
+  --ptsp-primary: #2B60DE;
+  --ptsp-primary-hover: #2451be;
   --ptsp-primary-light: #eef4fd;
   --ptsp-bg-page: #f1f5fa;
   --ptsp-bg-card: #ffffff;
@@ -18,8 +18,8 @@
 }
 
 .dark {
-  --ptsp-primary: #7baaf5;
-  --ptsp-primary-hover: #6395EE;
+  --ptsp-primary: #5c8cf0;
+  --ptsp-primary-hover: #2B60DE;
   --ptsp-primary-light: #16244d;
   --ptsp-bg-page: #0a1022;
   --ptsp-bg-card: #111a33;
@@ -149,12 +149,12 @@ input, button, select, textarea {
 .ptsp-btn-submit {
   width: 100%;
   height: 3rem;
-  background: #6395EE;
+  background: #2B60DE;
   color: #ffffff;
   font-weight: 800;
   font-size: 0.875rem;
   border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgba(99, 149, 238, 0.3), 0 4px 6px -4px rgba(99, 149, 238, 0.15);
+  box-shadow: 0 10px 15px -3px rgba(43, 96, 222, 0.3), 0 4px 6px -4px rgba(43, 96, 222, 0.15);
   transition: all 0.2s ease-in-out;
   display: flex;
   align-items: center;
@@ -164,8 +164,8 @@ input, button, select, textarea {
 }
 
 .ptsp-btn-submit:hover {
-  background: #4d82e4;
-  box-shadow: 0 20px 25px -5px rgba(99, 149, 238, 0.35), 0 8px 10px -6px rgba(99, 149, 238, 0.15);
+  background: #2451be;
+  box-shadow: 0 20px 25px -5px rgba(43, 96, 222, 0.35), 0 8px 10px -6px rgba(43, 96, 222, 0.15);
   transform: translateY(-1px);
 }
 

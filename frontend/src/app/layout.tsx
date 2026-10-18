@@ -44,7 +44,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${poppins.className} antialiased selection:bg-[#6395EE] selection:text-white`}>
+      <body className={`${poppins.className} antialiased selection:bg-[#2B60DE] selection:text-white`}>
         {children}
       </body>
     </html>

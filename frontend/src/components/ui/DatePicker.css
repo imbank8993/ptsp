@@ -1,19 +1,19 @@
 :root {
-  --n-primary: #6395EE;
+  --n-primary: #2B60DE;
   --n-border: #e2e8f0;
   --n-ink: #1e293b;
   --n-muted: #64748b;
   --n-card: #ffffff;
-  --n-soft: rgba(99, 149, 238, 0.1);
+  --n-soft: rgba(43, 96, 222, 0.1);
 }
 
 .dark {
-  --n-primary: #7baaf5;
+  --n-primary: #5c8cf0;
   --n-border: #1c2c54;
   --n-ink: #f1f5f9;
   --n-muted: #94a3b8;
   --n-card: #111a33;
-  --n-soft: rgba(123, 170, 245, 0.18);
+  --n-soft: rgba(92, 140, 240, 0.18);
 }
 
 .dpk-root {

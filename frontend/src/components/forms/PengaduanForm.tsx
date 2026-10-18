@@ -92,7 +92,7 @@ export default function PengaduanForm({
                   if (e.target.checked) handleChange('nama', 'Anonim');
                   else handleChange('nama', '');
                 }}
-                className="rounded text-[#6395EE] accent-[#6395EE] cursor-pointer"
+                className="rounded text-[#2B60DE] accent-[#2B60DE] cursor-pointer"
               />
               <label htmlFor="anonim" className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold cursor-pointer">
                 Kirim Anonim
