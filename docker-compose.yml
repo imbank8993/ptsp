@@ -4,6 +4,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        CACHEBUST: ${BUILD_TIMESTAMP:-1}
     container_name: ptsp-backend
     restart: unless-stopped
     env_file:
@@ -21,6 +23,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        CACHEBUST: ${BUILD_TIMESTAMP:-1}
     container_name: ptsp-frontend
     restart: unless-stopped
     environment:

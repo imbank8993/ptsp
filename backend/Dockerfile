@@ -11,6 +11,9 @@ RUN apk add --no-cache libc6-compat
 COPY package.json package-lock.json* ./
 RUN npm install --legacy-peer-deps
 
+# Invalidate cache for fresh backend build
+ARG CACHEBUST=1
+
 COPY tsconfig.json nest-cli.json ./
 COPY src ./src
 

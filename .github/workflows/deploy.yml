@@ -48,12 +48,17 @@ jobs:
               cp backend/.env.example backend/.env
             fi
 
-            echo "🐳 [3/5] Build dan restart container Docker (Zero-Downtime)..."
-            docker compose build
+            echo "🐳 [3/5] Build dan restart container Docker (Anti-Cache & Zero-Downtime)..."
+            BUILD_TIMESTAMP=$(date +%s) docker compose build
             docker compose up -d --remove-orphans
 
             echo "🧹 [4/5] Membersihkan cache Docker..."
             docker image prune -f
+
+            if command -v nginx > /dev/null 2>&1; then
+              echo "🔄 [4.1] Reloading Nginx reverse proxy cache..."
+              nginx -s reload || true
+            fi
 
             echo "✅ [5/5] Status container PTSP:"
             docker compose ps

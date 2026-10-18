@@ -14,6 +14,9 @@ ENV PORT=3001
 COPY package.json package-lock.json* ./
 RUN npm install --legacy-peer-deps
 
+# Invalidate cache for fresh application build
+ARG CACHEBUST=1
+
 COPY tsconfig.json postcss.config.mjs next.config.mjs ./
 COPY public ./public
 COPY src ./src
