@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
 import FileUpload from '@/components/ui/FileUpload';
+import DatePicker from '@/components/ui/DatePicker';
 import { submitPtspForm } from '@/lib/api';
 import { SubmissionResponse } from '@/types';
 
@@ -144,12 +145,11 @@ export default function GantiIjazahForm({
           <label className="block text-xs font-bold text-slate-700 mb-1">
             Tanggal Lahir <span className="text-red-500">*</span>
           </label>
-          <input
-            type="date"
+          <DatePicker
             required
             value={formData.tanggal_lahir}
-            onChange={(e) => handleChange('tanggal_lahir', e.target.value)}
-            className="ptsp-input"
+            onChange={(val) => handleChange('tanggal_lahir', val)}
+            placeholder="Pilih tanggal lahir"
           />
         </div>
 

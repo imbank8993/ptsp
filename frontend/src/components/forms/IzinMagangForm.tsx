@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
 import FileUpload from '@/components/ui/FileUpload';
+import DatePicker from '@/components/ui/DatePicker';
 import { submitPtspForm } from '@/lib/api';
 import { SubmissionResponse } from '@/types';
 
@@ -157,12 +158,11 @@ export default function IzinMagangForm({
           <label className="block text-xs font-bold text-slate-700 mb-1">
             Tanggal Mulai Magang <span className="text-red-500">*</span>
           </label>
-          <input
-            type="date"
+          <DatePicker
             required
             value={formData.tanggal_mulai}
-            onChange={(e) => handleChange('tanggal_mulai', e.target.value)}
-            className="ptsp-input"
+            onChange={(val) => handleChange('tanggal_mulai', val)}
+            placeholder="Pilih tanggal mulai"
           />
         </div>
 
@@ -171,12 +171,12 @@ export default function IzinMagangForm({
           <label className="block text-xs font-bold text-slate-700 mb-1">
             Tanggal Selesai Magang <span className="text-red-500">*</span>
           </label>
-          <input
-            type="date"
+          <DatePicker
             required
             value={formData.tanggal_selesai}
-            onChange={(e) => handleChange('tanggal_selesai', e.target.value)}
-            className="ptsp-input"
+            onChange={(val) => handleChange('tanggal_selesai', val)}
+            placeholder="Pilih tanggal selesai"
+            min={formData.tanggal_mulai}
           />
         </div>
       </div>

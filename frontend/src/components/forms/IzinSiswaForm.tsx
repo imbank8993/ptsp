@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
+import DatePicker from '@/components/ui/DatePicker';
 import { submitPtspForm } from '@/lib/api';
 import { SubmissionResponse } from '@/types';
 
@@ -162,12 +163,11 @@ export default function IzinSiswaForm({
           <label className="block text-xs font-bold text-slate-700 mb-1">
             Tanggal & Jam Keluar Asrama <span className="text-red-500">*</span>
           </label>
-          <input
-            type="date"
+          <DatePicker
             required
             value={formData.tanggal_mulai}
-            onChange={(e) => handleChange('tanggal_mulai', e.target.value)}
-            className="ptsp-input"
+            onChange={(val) => handleChange('tanggal_mulai', val)}
+            placeholder="Pilih tanggal keluar"
           />
         </div>
 
@@ -176,12 +176,12 @@ export default function IzinSiswaForm({
           <label className="block text-xs font-bold text-slate-700 mb-1">
             Tanggal Kembali ke Asrama <span className="text-red-500">*</span>
           </label>
-          <input
-            type="date"
+          <DatePicker
             required
             value={formData.tanggal_selesai}
-            onChange={(e) => handleChange('tanggal_selesai', e.target.value)}
-            className="ptsp-input"
+            onChange={(val) => handleChange('tanggal_selesai', val)}
+            placeholder="Pilih tanggal kembali"
+            min={formData.tanggal_mulai}
           />
         </div>
 
