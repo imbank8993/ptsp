@@ -378,26 +378,92 @@ input[type="date"] {
     background: #0f172a !important;
   }
 
+  /* Mobile Content Wrapper:
+     When sidebar is closed, transform is strictly none and will-change is NOT set,
+     so that the fixed header attaches directly to the browser viewport and NEVER scrolls! */
   .ptsp-content-wrapper {
-    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.28s ease-out;
-    will-change: transform;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    transform: none;
+    overflow: visible;
+  }
+
+  /* Fixed mobile header permanence */
+  .ptsp-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 40 !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* ACCA-NEW Mobile Drawer Effect:
+     When sidebar is open, the outer layout locks and the page content
+     slides to the right with rounded corners (24px 0 0 24px) */
+  .ptsp-layout.sidebar-mobile-open {
+    position: fixed !important;
+    inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    touch-action: pan-y;
+    z-index: 1000 !important;
+  }
+
+  .dark .ptsp-layout.sidebar-mobile-open {
+    background: #0f172a !important;
   }
 
   .ptsp-layout.sidebar-mobile-open .ptsp-content-wrapper {
     position: absolute !important;
     inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     width: 100% !important;
     height: 100% !important;
     height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    background: var(--ptsp-bg-page, #f1f5fa) !important;
     transform: translate3d(var(--app-sidebar-mobile-w), 0, 0) !important;
     border-radius: 24px 0 0 24px !important;
-    clip-path: inset(0 round 24px 0 0 24px);
-    -webkit-clip-path: inset(0 round 24px 0 0 24px);
+    clip-path: inset(0 round 24px 0 0 24px) !important;
+    -webkit-clip-path: inset(0 round 24px 0 0 24px) !important;
     border: none !important;
-    box-shadow: none !important;
     overflow: hidden !important;
     pointer-events: none;
     isolation: isolate;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.28s ease-out;
+    filter: drop-shadow(-10px 0 24px rgba(0, 0, 0, 0.22)) !important;
+  }
+
+  .dark .ptsp-layout.sidebar-mobile-open .ptsp-content-wrapper {
+    background: var(--ptsp-bg-page, #0a1120) !important;
+    filter: drop-shadow(-10px 0 24px rgba(0, 0, 0, 0.6)) !important;
+  }
+
+  /* Shift main content so current scroll position is preserved seamlessly */
+  .ptsp-layout.sidebar-mobile-open main {
+    transform: translateY(calc(-1 * var(--sidebar-scroll-y, 0px))) !important;
+  }
+
+  .ptsp-layout.sidebar-mobile-open .ptsp-header {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
 
   /* The subtle dimming backdrop matching acca-new */
@@ -425,4 +491,5 @@ input[type="date"] {
     }
   }
 }
+
 

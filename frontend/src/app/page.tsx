@@ -131,7 +131,7 @@ export default function PtspHomePage() {
       />
 
       {/* Main Container (Native smooth document scroll on mobile, independent scroll on desktop) */}
-      <div className="ptsp-content-wrapper flex-1 w-full min-h-screen lg:h-screen lg:overflow-y-auto no-scrollbar flex flex-col min-w-0 pt-[calc(60px+env(safe-area-inset-top))] lg:pt-0">
+      <div className="ptsp-content-wrapper flex-1 w-full min-h-screen lg:h-screen lg:overflow-y-auto no-scrollbar flex flex-col min-w-0 pt-0">
         <Header
           onOpenMobileSidebar={openMobileSidebar}
           onOpenTracker={() => {
@@ -142,7 +142,7 @@ export default function PtspHomePage() {
           onToggleDark={handleToggleDark}
         />
 
-        <main className="flex-1 p-3.5 sm:p-6 lg:p-10 pb-[calc(6rem+env(safe-area-inset-bottom))] lg:pb-10 max-w-5xl mx-auto w-full">
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-10 pt-[calc(60px+env(safe-area-inset-top)+14px)] lg:pt-10 pb-[calc(6rem+env(safe-area-inset-bottom))] lg:pb-10 max-w-5xl mx-auto w-full">
           {activeService === 'tracker' ? (
             /* Tracker View */
             <TrackerView initialToken={trackerInitialCode} />
