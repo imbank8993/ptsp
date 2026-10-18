@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Megaphone, Calendar, Clock, Send } from 'lucide-react';
 import FileUpload from '@/components/ui/FileUpload';
+import DatePicker from '@/components/ui/DatePicker';
 import { submitPtspForm } from '@/lib/api';
 import { SubmissionResponse } from '@/types';
 
@@ -19,7 +20,8 @@ export default function SosialisasiForm({ onSuccess, onProgressChange }: Sosiali
     tujuan: '',
     jenis: '',
     jumlah_tim: '',
-    rencana_waktu: '',
+    rencana_tanggal: '',
+    rencana_jam: '',
     target: '',
     file_url: '',
   });
@@ -27,7 +29,7 @@ export default function SosialisasiForm({ onSuccess, onProgressChange }: Sosiali
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Dynamic progress calculation (9 required fields)
+  // Dynamic progress calculation (10 required fields)
   const calculateProgress = (data: typeof formData) => {
     let filled = 0;
     const requiredKeys: (keyof typeof formData)[] = [
@@ -37,7 +39,8 @@ export default function SosialisasiForm({ onSuccess, onProgressChange }: Sosiali
       'tujuan',
       'jenis',
       'jumlah_tim',
-      'rencana_waktu',
+      'rencana_tanggal',
+      'rencana_jam',
       'target',
       'file_url',
     ];
@@ -66,7 +69,23 @@ export default function SosialisasiForm({ onSuccess, onProgressChange }: Sosiali
 
     setLoading(true);
     try {
-      const res = await submitPtspForm('sosialisasi', formData);
+      const rencana_waktu = formData.rencana_tanggal && formData.rencana_jam
+        ? `${formData.rencana_tanggal}T${formData.rencana_jam}`
+        : (formData.rencana_tanggal ? `${formData.rencana_tanggal}T08:00` : '');
+
+      const payload = {
+        nama: formData.nama,
+        wa: formData.wa,
+        instansi: formData.instansi,
+        tujuan: formData.tujuan,
+        jenis: formData.jenis,
+        jumlah_tim: formData.jumlah_tim,
+        rencana_waktu,
+        target: formData.target,
+        file_url: formData.file_url,
+      };
+
+      const res = await submitPtspForm('sosialisasi', payload);
       onSuccess(res);
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan.');
@@ -189,20 +208,31 @@ export default function SosialisasiForm({ onSuccess, onProgressChange }: Sosiali
           />
         </div>
 
-        {/* Rencana Pelaksanaan */}
+        {/* Tanggal Pelaksanaan */}
         <div>
           <label className="block text-xs font-bold text-slate-700 mb-1">
-            Rencana Pelaksanaan <span className="text-red-500">*</span>
+            Tanggal Pelaksanaan <span className="text-red-500">*</span>
           </label>
-          <div className="relative">
-            <input
-              type="datetime-local"
-              required
-              value={formData.rencana_waktu}
-              onChange={(e) => handleChange('rencana_waktu', e.target.value)}
-              className="ptsp-input pr-8"
-            />
-          </div>
+          <DatePicker
+            required
+            value={formData.rencana_tanggal}
+            onChange={(val) => handleChange('rencana_tanggal', val)}
+            placeholder="Pilih tanggal pelaksanaan"
+          />
+        </div>
+
+        {/* Waktu / Jam Pelaksanaan */}
+        <div>
+          <label className="block text-xs font-bold text-slate-700 mb-1">
+            Waktu / Jam Pelaksanaan <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="time"
+            required
+            value={formData.rencana_jam}
+            onChange={(e) => handleChange('rencana_jam', e.target.value)}
+            className="ptsp-input cursor-pointer"
+          />
         </div>
 
         {/* Target Peserta */}

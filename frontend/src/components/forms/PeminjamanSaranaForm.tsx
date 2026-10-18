@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
 import FileUpload from '@/components/ui/FileUpload';
+import DatePicker from '@/components/ui/DatePicker';
 import { submitPtspForm } from '@/lib/api';
 import { SubmissionResponse } from '@/types';
 
@@ -19,8 +20,8 @@ export default function PeminjamanSaranaForm({
     nama: '',
     wa: '',
     alamat: '',
-    tanggal_mulai: '',
-    tanggal_selesai: '',
+    rencana_tanggal: '',
+    rencana_jam: '',
     file_proposal: '',
   });
 
@@ -33,7 +34,8 @@ export default function PeminjamanSaranaForm({
       'nama',
       'wa',
       'alamat',
-      'tanggal_mulai',
+      'rencana_tanggal',
+      'rencana_jam',
       'file_proposal',
     ];
     requiredKeys.forEach((k) => {
@@ -61,7 +63,19 @@ export default function PeminjamanSaranaForm({
 
     setLoading(true);
     try {
-      const res = await submitPtspForm('peminjaman-sarana', formData);
+      const tanggal_mulai = formData.rencana_tanggal && formData.rencana_jam
+        ? `${formData.rencana_tanggal}T${formData.rencana_jam}`
+        : (formData.rencana_tanggal ? `${formData.rencana_tanggal}T08:00` : '');
+
+      const payload = {
+        nama: formData.nama,
+        wa: formData.wa,
+        alamat: formData.alamat,
+        tanggal_mulai,
+        file_proposal: formData.file_proposal,
+      };
+
+      const res = await submitPtspForm('peminjaman-sarana', payload);
       onSuccess(res);
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan.');
@@ -130,17 +144,30 @@ export default function PeminjamanSaranaForm({
           />
         </div>
 
-        {/* Rencana Pelaksanaan */}
+        {/* Tanggal Pelaksanaan */}
         <div>
           <label className="block text-xs font-bold text-slate-700 mb-1">
-            Rencana Pelaksanaan <span className="text-red-500">*</span>
+            Tanggal Pelaksanaan <span className="text-red-500">*</span>
+          </label>
+          <DatePicker
+            required
+            value={formData.rencana_tanggal}
+            onChange={(val) => handleChange('rencana_tanggal', val)}
+            placeholder="Pilih tanggal pelaksanaan"
+          />
+        </div>
+
+        {/* Waktu / Jam Pelaksanaan */}
+        <div>
+          <label className="block text-xs font-bold text-slate-700 mb-1">
+            Waktu / Jam Pelaksanaan <span className="text-red-500">*</span>
           </label>
           <input
-            type="datetime-local"
+            type="time"
             required
-            value={formData.tanggal_mulai}
-            onChange={(e) => handleChange('tanggal_mulai', e.target.value)}
-            className="ptsp-input"
+            value={formData.rencana_jam}
+            onChange={(e) => handleChange('rencana_jam', e.target.value)}
+            className="ptsp-input cursor-pointer"
           />
         </div>
       </div>

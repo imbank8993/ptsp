@@ -161,7 +161,7 @@ export default function IzinSiswaForm({
         {/* Tanggal Mulai Izin */}
         <div>
           <label className="block text-xs font-bold text-slate-700 mb-1">
-            Tanggal & Jam Keluar Asrama <span className="text-red-500">*</span>
+            Tanggal Keluar Asrama <span className="text-red-500">*</span>
           </label>
           <DatePicker
             required
