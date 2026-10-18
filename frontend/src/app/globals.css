@@ -208,3 +208,128 @@ input, button, select, textarea {
 .animate-blink {
   animation: blink 3.5s infinite;
 }
+
+/* =========================================================
+   SAFARI MOBILE OPTIMIZATIONS & ACCA-NEW MOBILE DRAWER
+========================================================= */
+
+/* Reset Safari native date input */
+input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+/* iOS Safari auto-zoom prevention: keep input font-size >= 16px */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 1023.98px) {
+    .ptsp-input,
+    .ptsp-textarea,
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+}
+
+@media (max-width: 1023.98px) {
+  :root {
+    --app-sidebar-mobile-w: min(calc(100vw - 64px), 320px);
+  }
+
+  /* Browser canvas color for Safari iOS top status bar & bottom URL bar */
+  html:not(.dark),
+  html:not(.dark) body {
+    background-color: var(--app-browser-bg, #ffffff) !important;
+    background-image: none !important;
+    color-scheme: light;
+  }
+
+  html.dark,
+  html.dark body,
+  body.dark {
+    background-color: var(--app-browser-bg, #0f172a) !important;
+    background-image: none !important;
+    color-scheme: dark;
+  }
+
+  /* Prevent body scrolling when mobile sidebar is open */
+  html.app-sidebar-open,
+  html.app-sidebar-open body {
+    overflow: hidden !important;
+  }
+
+  html.app-sidebar-open body {
+    position: fixed;
+    top: calc(-1 * var(--sidebar-scroll-y, 0px));
+    width: 100%;
+  }
+
+  /* ACCA-NEW Mobile Drawer Effect:
+     When sidebar is open, the outer layout locks and the page content
+     slides to the right with rounded corners (24px 0 0 24px) */
+  .ptsp-layout.sidebar-mobile-open {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    touch-action: pan-y;
+    z-index: 1000 !important;
+  }
+
+  .dark .ptsp-layout.sidebar-mobile-open {
+    background: #0f172a !important;
+  }
+
+  .ptsp-content-wrapper {
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.28s ease-out;
+    will-change: transform;
+  }
+
+  .ptsp-layout.sidebar-mobile-open .ptsp-content-wrapper {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    height: 100dvh !important;
+    transform: translate3d(var(--app-sidebar-mobile-w), 0, 0) !important;
+    border-radius: 24px 0 0 24px !important;
+    clip-path: inset(0 round 24px 0 0 24px);
+    -webkit-clip-path: inset(0 round 24px 0 0 24px);
+    border: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    pointer-events: none;
+    isolation: isolate;
+  }
+
+  /* The subtle dimming backdrop matching acca-new */
+  .sidebar-mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.28);
+    z-index: 1200;
+    cursor: pointer;
+    pointer-events: auto !important;
+    border-radius: inherit;
+    opacity: 0;
+    animation: fadeInBackdrop 0.25s forwards;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+  }
+
+  .dark .sidebar-mobile-backdrop {
+    background: rgba(2, 7, 24, 0.55);
+  }
+
+  @keyframes fadeInBackdrop {
+    to {
+      opacity: 1;
+    }
+  }
+}
+

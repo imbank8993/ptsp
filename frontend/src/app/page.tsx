@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Sidebar, { PTSP_SERVICES } from '@/components/Sidebar';
 import Header from '@/components/Header';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import SuccessModal from '@/components/ui/SuccessModal';
 import TrackerView from '@/components/tracker/TrackerView';
+import { applyThemeColor } from '@/lib/theme-color';
 
 import SosialisasiForm from '@/components/forms/SosialisasiForm';
 import PeminjamanSaranaForm from '@/components/forms/PeminjamanSaranaForm';
@@ -28,23 +29,60 @@ export default function PtspHomePage() {
   const [trackerInitialCode, setTrackerInitialCode] = useState<string>('');
   const [isDark, setIsDark] = useState(false);
 
-  // Initialize theme from localStorage or system preference
+  const scrollPosRef = useRef(0);
+
+  const openMobileSidebar = useCallback(() => {
+    scrollPosRef.current = window.scrollY;
+    setMobileSidebarOpen(true);
+  }, []);
+
+  const closeMobileSidebar = useCallback(() => {
+    setMobileSidebarOpen(false);
+  }, []);
+
+  // Initialize theme from localStorage or system preference and sync chrome colors
   useEffect(() => {
     const savedTheme = localStorage.getItem('ptsp_theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const dark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    setIsDark(dark);
     if (dark) {
-      setIsDark(true);
       document.documentElement.classList.add('dark');
     } else {
-      setIsDark(false);
       document.documentElement.classList.remove('dark');
     }
-    const metaTheme = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) {
-      metaTheme.setAttribute('content', dark ? '#0f172a' : '#ffffff');
-    }
+    applyThemeColor(false);
   }, []);
+
+  // Close mobile sidebar automatically if screen expands to desktop size
+  useEffect(() => {
+    const mobile = window.matchMedia('(max-width: 1023.98px)');
+    const handleDesktopBreak = () => {
+      if (!mobile.matches) setMobileSidebarOpen(false);
+    };
+    mobile.addEventListener('change', handleDesktopBreak);
+    return () => mobile.removeEventListener('change', handleDesktopBreak);
+  }, []);
+
+  // Synchronize Safari status bar and lock scroll when mobile sidebar opens (acca-new style)
+  useEffect(() => {
+    applyThemeColor(mobileSidebarOpen);
+
+    if (mobileSidebarOpen && window.matchMedia('(max-width: 1023.98px)').matches) {
+      const root = document.documentElement;
+      root.style.setProperty('--sidebar-scroll-y', `${scrollPosRef.current}px`);
+      root.classList.add('app-sidebar-open');
+
+      return () => {
+        root.classList.remove('app-sidebar-open');
+        root.style.removeProperty('--sidebar-scroll-y');
+        const prevBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = 'auto';
+        window.scrollTo(0, scrollPosRef.current);
+        root.style.scrollBehavior = prevBehavior;
+      };
+    }
+  }, [mobileSidebarOpen]);
 
   const handleToggleDark = () => {
     setIsDark((prev) => {
@@ -56,10 +94,7 @@ export default function PtspHomePage() {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('ptsp_theme', 'light');
       }
-      const metaTheme = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
-      if (metaTheme) {
-        metaTheme.setAttribute('content', next ? '#0f172a' : '#ffffff');
-      }
+      applyThemeColor(mobileSidebarOpen);
       return next;
     });
   };
@@ -78,22 +113,27 @@ export default function PtspHomePage() {
   };
 
   return (
-    <div className="min-h-screen lg:h-screen w-full lg:w-screen flex flex-col lg:flex-row overflow-x-hidden lg:overflow-hidden bg-[#f1f5fa] dark:bg-[#0a1120] text-slate-800 dark:text-slate-100 transition-colors duration-200">
-      {/* Left Sidebar (Independent scrolling) */}
+    <div
+      className={`min-h-screen lg:h-screen w-full lg:w-screen flex flex-col lg:flex-row overflow-x-hidden lg:overflow-hidden bg-[#f1f5fa] dark:bg-[#0a1120] text-slate-800 dark:text-slate-100 transition-colors duration-200 ptsp-layout ${
+        mobileSidebarOpen ? 'sidebar-mobile-open' : ''
+      }`}
+    >
+      {/* Left Sidebar (Independent scrolling on desktop, slide drawer on mobile) */}
       <Sidebar
         activeService={activeService}
         onSelectService={(id) => {
           setActiveService(id);
           setProgress(0);
+          closeMobileSidebar();
         }}
         mobileOpen={mobileSidebarOpen}
-        onCloseMobile={() => setMobileSidebarOpen(false)}
+        onCloseMobile={closeMobileSidebar}
       />
 
       {/* Main Container (Native smooth document scroll on mobile, independent scroll on desktop) */}
-      <div className="flex-1 w-full min-h-screen lg:h-screen lg:overflow-y-auto no-scrollbar flex flex-col min-w-0">
+      <div className="ptsp-content-wrapper flex-1 w-full min-h-screen lg:h-screen lg:overflow-y-auto no-scrollbar flex flex-col min-w-0 pt-[calc(60px+env(safe-area-inset-top))] lg:pt-0">
         <Header
-          onOpenMobileSidebar={() => setMobileSidebarOpen(true)}
+          onOpenMobileSidebar={openMobileSidebar}
           onOpenTracker={() => {
             setActiveService('tracker');
             setProgress(0);
@@ -195,9 +235,18 @@ export default function PtspHomePage() {
             </div>
           )}
         </main>
+
+        {/* Mobile Backdrop matching ACCA-NEW */}
+        {mobileSidebarOpen && (
+          <div
+            className="sidebar-mobile-backdrop"
+            onClick={closeMobileSidebar}
+            aria-label="Tutup Menu"
+          />
+        )}
       </div>
 
-      {/* Floating WhatsApp Helpdesk button */}
+      {/* Floating Draggable WhatsApp Helpdesk button */}
       <WhatsAppButton />
 
       {/* Submission Success Modal with Confetti */}

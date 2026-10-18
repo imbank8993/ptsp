@@ -178,18 +178,15 @@ export default function Sidebar({
         {content}
       </aside>
 
-      {/* Mobile Drawer (Clean White Background) */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
-            onClick={onCloseMobile}
-          />
-          <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-[#0f172a] shadow-2xl z-50 flex flex-col h-full border-r border-slate-200/80 dark:border-slate-800 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
-            {content}
-          </div>
-        </div>
-      )}
+      {/* Mobile Drawer (ACCA-NEW Style Slide-in Drawer) */}
+      <aside
+        className={`lg:hidden fixed top-0 left-0 h-[100dvh] w-[min(calc(100vw-64px),320px)] bg-white dark:bg-[#0f172a] shadow-2xl z-[1100] flex flex-col border-r border-slate-200/80 dark:border-slate-800 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] transition-transform duration-300 ease-out will-change-transform ${
+          mobileOpen ? 'translate-x-0' : '-translate-x-full pointer-events-none'
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        {content}
+      </aside>
     </>
   );
 }
