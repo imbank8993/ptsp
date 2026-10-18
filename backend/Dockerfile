@@ -8,8 +8,8 @@ WORKDIR /app
 
 RUN apk add --no-cache libc6-compat
 
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json package-lock.json* ./
+RUN npm install --legacy-peer-deps
 
 COPY tsconfig.json nest-cli.json ./
 COPY src ./src

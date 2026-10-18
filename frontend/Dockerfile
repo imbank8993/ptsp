@@ -11,8 +11,8 @@ RUN apk add --no-cache libc6-compat
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3001
 
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json package-lock.json* ./
+RUN npm install --legacy-peer-deps
 
 COPY tsconfig.json postcss.config.mjs next.config.mjs ./
 COPY public ./public
