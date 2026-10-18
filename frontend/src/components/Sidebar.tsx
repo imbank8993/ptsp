@@ -89,23 +89,23 @@ export default function Sidebar({
   onCloseMobile,
 }: SidebarProps) {
   const content = (
-    <div className="flex flex-col h-full text-white">
+    <div className="flex flex-col h-full text-slate-800 dark:text-slate-100">
       {/* Brand Header with Logo Insan Cendekia */}
-      <div className="h-[70px] px-5 sm:px-6 flex items-center justify-between border-b border-white/10 shrink-0">
+      <div className="h-[70px] px-5 sm:px-6 flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white/15 dark:bg-white/10 backdrop-blur-md flex items-center justify-center p-1 shadow-inner border border-white/20 shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800/80 p-1 shadow-xs border border-slate-200/80 dark:border-slate-700 shrink-0 flex items-center justify-center">
             {/* Logo Insan Cendekia */}
             <img
               src="/Logo Insan Cendekia.png"
               alt="Logo Insan Cendekia"
-              className="w-full h-full object-contain filter drop-shadow-sm"
+              className="w-full h-full object-contain filter drop-shadow-xs"
             />
           </div>
           <div>
-            <h1 className="text-base font-black tracking-tight leading-none text-white">
+            <h1 className="text-base font-black tracking-tight leading-none text-slate-900 dark:text-white">
               PTSP DIGITAL
             </h1>
-            <p className="text-[11px] font-semibold text-blue-200/90 mt-1 tracking-wide">
+            <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1 tracking-wide">
               MAN Insan Cendekia Gowa
             </p>
           </div>
@@ -114,7 +114,7 @@ export default function Sidebar({
         {/* Mobile close button */}
         <button
           onClick={onCloseMobile}
-          className="lg:hidden p-2 rounded-xl text-white/70 hover:text-white hover:bg-white/10 transition"
+          className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
         >
           <X className="w-5 h-5" />
         </button>
@@ -137,124 +137,88 @@ export default function Sidebar({
               }}
               className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer group ${
                 isActive
-                  ? 'bg-white dark:bg-[#162544] text-[#2f66c7] dark:text-white shadow-md shadow-blue-950/20 translate-x-1 border border-white dark:border-[#6395EE]/40'
+                  ? 'bg-[#6395EE] text-white shadow-md shadow-[#6395EE]/25 translate-x-1 font-bold'
                   : isTracker
-                  ? 'bg-white/20 dark:bg-[#6395EE]/20 text-white dark:text-blue-100 hover:bg-white/30 border border-white/30 dark:border-blue-400/30'
-                  : 'text-white/90 dark:text-slate-300 hover:bg-white/15 dark:hover:bg-white/10 hover:text-white'
+                  ? 'bg-blue-50/80 dark:bg-blue-950/40 text-[#6395EE] dark:text-[#7baaf5] hover:bg-blue-100/70 dark:hover:bg-blue-900/50 border border-blue-200/80 dark:border-blue-900/50 font-semibold'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-slate-800/60 font-medium'
               }`}
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div
                   className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                     isActive
-                      ? 'bg-blue-50 dark:bg-blue-950/80 text-[#6395EE] dark:text-[#7baaf5]'
-                      : 'bg-white/15 dark:bg-white/10 text-white'
+                      ? 'bg-white/20 text-white'
+                      : isTracker
+                      ? 'bg-white dark:bg-blue-900/50 text-[#6395EE] dark:text-[#7baaf5] shadow-xs'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-white'
                   }`}
                 >
                   <Icon className="w-[18px] h-[18px] stroke-[2.2]" />
                 </div>
-                <span
-                  className={`text-sm font-semibold truncate ${
-                    isActive ? 'text-[#2f66c7] dark:text-white font-bold' : 'text-white/95 dark:text-slate-200'
-                  }`}
-                >
+                <span className="text-sm truncate">
                   {item.title}
                 </span>
               </div>
 
               {/* Indicator dot for active item */}
               {isActive && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#6395EE] dark:bg-[#7baaf5] shrink-0 ml-2" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white shrink-0 ml-2 shadow-xs" />
               )}
             </button>
           );
         })}
       </div>
 
-      {/* Footer Branding with Insan Cendekia & ACCA Logos */}
-      <div className="p-3.5 pt-3 border-t border-white/20 dark:border-white/10 text-center shrink-0">
-        {/* Linked Logos */}
-        <div className="grid grid-cols-2 gap-2 mb-2.5">
-          {/* Logo Insan Cendekia -> icgowa.sch.id */}
-          <a
-            href="https://icgowa.sch.id"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Kunjungi Portal MAN Insan Cendekia Gowa (icgowa.sch.id)"
-            className="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-white/15 dark:bg-white/10 hover:bg-white/25 dark:hover:bg-white/15 border border-white/25 dark:border-white/15 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] shadow-xs group"
-          >
-            <div className="w-6 h-6 rounded-lg bg-white/95 p-0.5 flex items-center justify-center shrink-0 shadow-xs">
-              <img
-                src="/Logo Insan Cendekia.png"
-                alt="MAN IC Gowa"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="min-w-0 text-left">
-              <p className="text-[10px] font-black leading-tight text-white truncate group-hover:underline">
-                icgowa.sch.id
-              </p>
-              <p className="text-[8px] text-white/75 truncate leading-none mt-0.5">
-                Portal Utama
-              </p>
-            </div>
-          </a>
+      {/* Footer with Linked Icon Badges Only (no texts, clean minimal design) */}
+      <div className="p-3 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-center gap-3 shrink-0">
+        {/* Logo Insan Cendekia -> icgowa.sch.id */}
+        <a
+          href="https://icgowa.sch.id"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Kunjungi Portal Resmi MAN Insan Cendekia Gowa (icgowa.sch.id)"
+          className="w-10 h-10 rounded-xl bg-slate-50 hover:bg-blue-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 p-1.5 flex items-center justify-center border border-slate-200/80 dark:border-slate-700 shadow-xs hover:shadow-sm hover:border-[#6395EE]/50 transition-all duration-200 group cursor-pointer"
+        >
+          <img
+            src="/Logo Insan Cendekia.png"
+            alt="MAN IC Gowa"
+            className="w-full h-full object-contain transition-transform group-hover:scale-110"
+          />
+        </a>
 
-          {/* Logo ACCA -> acca.icgowa.sch.id */}
-          <a
-            href="https://acca.icgowa.sch.id"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Kunjungi Portal ACCA IC Gowa (acca.icgowa.sch.id)"
-            className="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-white/15 dark:bg-white/10 hover:bg-white/25 dark:hover:bg-white/15 border border-white/25 dark:border-white/15 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] shadow-xs group"
-          >
-            <div className="w-6 h-6 rounded-lg bg-white/95 p-0.5 flex items-center justify-center shrink-0 shadow-xs">
-              <img
-                src="/logo-acca.png"
-                alt="ACCA"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="min-w-0 text-left">
-              <p className="text-[10px] font-black leading-tight text-white truncate group-hover:underline">
-                acca.icgowa.sch.id
-              </p>
-              <p className="text-[8px] text-white/75 truncate leading-none mt-0.5">
-                Portal ACCA
-              </p>
-            </div>
-          </a>
-        </div>
-
-        <div className="flex items-center justify-center gap-2 mb-1">
-          <div className="h-px bg-white/25 dark:bg-white/15 flex-1" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-white/80 dark:text-white/50">
-            PTSP DIGITAL
-          </span>
-          <div className="h-px bg-white/25 dark:bg-white/15 flex-1" />
-        </div>
-        <p className="text-[9.5px] text-white/75 dark:text-white/40">
-          Akademik & Layanan Publik Terpadu
-        </p>
+        {/* Logo ACCA (Kecil) -> acca.icgowa.sch.id */}
+        <a
+          href="https://acca.icgowa.sch.id"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Kunjungi Portal ACCA IC Gowa (acca.icgowa.sch.id)"
+          className="w-10 h-10 rounded-xl bg-slate-50 hover:bg-blue-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 p-1.5 flex items-center justify-center border border-slate-200/80 dark:border-slate-700 shadow-xs hover:shadow-sm hover:border-[#6395EE]/50 transition-all duration-200 group cursor-pointer"
+        >
+          <img
+            src="/logo-sidebar-kecil.png"
+            alt="ACCA IC Gowa"
+            className="w-full h-full object-contain transition-transform group-hover:scale-110"
+          />
+        </a>
       </div>
     </div>
   );
 
   return (
     <>
-      {/* Desktop Sidebar (Cornflower Blue #6395EE gradient) */}
-      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 h-screen sticky top-0 bg-gradient-to-b from-[#6395EE] via-[#5284e7] to-[#3d72d6] dark:from-[#0c1527] dark:via-[#080e1b] dark:to-[#050811] shadow-2xl z-20 border-r border-blue-300/30 dark:border-slate-800">
+      {/* Desktop Sidebar (Clean White Background) */}
+      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 h-screen sticky top-0 bg-white dark:bg-[#0f172a] shadow-xs z-20 border-r border-slate-200/80 dark:border-slate-800">
         {content}
       </aside>
 
-      {/* Mobile Drawer (Cornflower Blue #6395EE gradient) */}
+      {/* Mobile Drawer (Clean White Background) */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-[#6395EE] via-[#5284e7] to-[#3d72d6] dark:from-[#0c1527] dark:via-[#080e1b] dark:to-[#050811] shadow-2xl z-50 flex flex-col h-full">
+          <div className="fixed inset-y-0 left-0 w-80 bg-white dark:bg-[#0f172a] shadow-2xl z-50 flex flex-col h-full border-r border-slate-200/80 dark:border-slate-800">
             {content}
           </div>
         </div>
