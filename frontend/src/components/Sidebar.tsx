@@ -137,25 +137,25 @@ export default function Sidebar({
               }}
               className={`w-full text-left transition-all duration-200 flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer group ${
                 isActive
-                  ? 'bg-white dark:bg-[#111e3b] text-slate-900 dark:text-white shadow-md shadow-blue-950/25 translate-x-1 border border-transparent dark:border-[#6395EE]/40'
+                  ? 'bg-white dark:bg-[#162544] text-[#2f66c7] dark:text-white shadow-md shadow-blue-950/20 translate-x-1 border border-white dark:border-[#6395EE]/40'
                   : isTracker
-                  ? 'bg-[#6395EE]/20 text-blue-100 hover:bg-[#6395EE]/30 border border-blue-400/30'
-                  : 'text-white/85 hover:bg-white/10 hover:text-white'
+                  ? 'bg-white/20 dark:bg-[#6395EE]/20 text-white dark:text-blue-100 hover:bg-white/30 border border-white/30 dark:border-blue-400/30'
+                  : 'text-white/90 dark:text-slate-300 hover:bg-white/15 dark:hover:bg-white/10 hover:text-white'
               }`}
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div
                   className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                     isActive
-                      ? 'bg-blue-50 dark:bg-blue-950/70 text-[#6395EE] dark:text-[#7baaf5]'
-                      : 'bg-white/10 text-white/90'
+                      ? 'bg-blue-50 dark:bg-blue-950/80 text-[#6395EE] dark:text-[#7baaf5]'
+                      : 'bg-white/15 dark:bg-white/10 text-white'
                   }`}
                 >
                   <Icon className="w-[18px] h-[18px] stroke-[2.2]" />
                 </div>
                 <span
                   className={`text-sm font-semibold truncate ${
-                    isActive ? 'text-slate-900 dark:text-white font-bold' : 'text-white/95'
+                    isActive ? 'text-[#2f66c7] dark:text-white font-bold' : 'text-white/95 dark:text-slate-200'
                   }`}
                 >
                   {item.title}
@@ -171,16 +171,69 @@ export default function Sidebar({
         })}
       </div>
 
-      {/* Footer Branding */}
-      <div className="p-4 pt-3 border-t border-white/10 text-center shrink-0">
+      {/* Footer Branding with Insan Cendekia & ACCA Logos */}
+      <div className="p-3.5 pt-3 border-t border-white/20 dark:border-white/10 text-center shrink-0">
+        {/* Linked Logos */}
+        <div className="grid grid-cols-2 gap-2 mb-2.5">
+          {/* Logo Insan Cendekia -> icgowa.sch.id */}
+          <a
+            href="https://icgowa.sch.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Kunjungi Portal MAN Insan Cendekia Gowa (icgowa.sch.id)"
+            className="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-white/15 dark:bg-white/10 hover:bg-white/25 dark:hover:bg-white/15 border border-white/25 dark:border-white/15 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] shadow-xs group"
+          >
+            <div className="w-6 h-6 rounded-lg bg-white/95 p-0.5 flex items-center justify-center shrink-0 shadow-xs">
+              <img
+                src="/Logo Insan Cendekia.png"
+                alt="MAN IC Gowa"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="min-w-0 text-left">
+              <p className="text-[10px] font-black leading-tight text-white truncate group-hover:underline">
+                icgowa.sch.id
+              </p>
+              <p className="text-[8px] text-white/75 truncate leading-none mt-0.5">
+                Portal Utama
+              </p>
+            </div>
+          </a>
+
+          {/* Logo ACCA -> acca.icgowa.sch.id */}
+          <a
+            href="https://acca.icgowa.sch.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Kunjungi Portal ACCA IC Gowa (acca.icgowa.sch.id)"
+            className="flex items-center gap-1.5 px-2 py-1.5 rounded-xl bg-white/15 dark:bg-white/10 hover:bg-white/25 dark:hover:bg-white/15 border border-white/25 dark:border-white/15 backdrop-blur-md transition-all duration-200 hover:scale-[1.02] shadow-xs group"
+          >
+            <div className="w-6 h-6 rounded-lg bg-white/95 p-0.5 flex items-center justify-center shrink-0 shadow-xs">
+              <img
+                src="/logo-acca.png"
+                alt="ACCA"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="min-w-0 text-left">
+              <p className="text-[10px] font-black leading-tight text-white truncate group-hover:underline">
+                acca.icgowa.sch.id
+              </p>
+              <p className="text-[8px] text-white/75 truncate leading-none mt-0.5">
+                Portal ACCA
+              </p>
+            </div>
+          </a>
+        </div>
+
         <div className="flex items-center justify-center gap-2 mb-1">
-          <div className="h-px bg-white/20 flex-1" />
-          <span className="text-[10px] font-black uppercase tracking-widest text-white/50">
+          <div className="h-px bg-white/25 dark:bg-white/15 flex-1" />
+          <span className="text-[10px] font-black uppercase tracking-widest text-white/80 dark:text-white/50">
             PTSP DIGITAL
           </span>
-          <div className="h-px bg-white/20 flex-1" />
+          <div className="h-px bg-white/25 dark:bg-white/15 flex-1" />
         </div>
-        <p className="text-[9.5px] text-white/40">
+        <p className="text-[9.5px] text-white/75 dark:text-white/40">
           Akademik & Layanan Publik Terpadu
         </p>
       </div>
@@ -189,19 +242,19 @@ export default function Sidebar({
 
   return (
     <>
-      {/* Desktop Sidebar (Permanent, independent scroll, no-scrollbar, royal blue gradient) */}
-      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 h-screen sticky top-0 bg-gradient-to-b from-[#1e3a8a] via-[#1a3277] to-[#132457] dark:from-[#0a1126] dark:via-[#070c1c] dark:to-[#040710] shadow-2xl z-20 border-r border-blue-900/20 dark:border-slate-800">
+      {/* Desktop Sidebar (Cornflower Blue #6395EE gradient) */}
+      <aside className="hidden lg:flex flex-col w-72 xl:w-80 shrink-0 h-screen sticky top-0 bg-gradient-to-b from-[#6395EE] via-[#5284e7] to-[#3d72d6] dark:from-[#0c1527] dark:via-[#080e1b] dark:to-[#050811] shadow-2xl z-20 border-r border-blue-300/30 dark:border-slate-800">
         {content}
       </aside>
 
-      {/* Mobile Drawer (Clean, no-scrollbar, royal blue gradient) */}
+      {/* Mobile Drawer (Cornflower Blue #6395EE gradient) */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-[#1e3a8a] via-[#1a3277] to-[#132457] dark:from-[#0a1126] dark:via-[#070c1c] dark:to-[#040710] shadow-2xl z-50 flex flex-col h-full">
+          <div className="fixed inset-y-0 left-0 w-80 bg-gradient-to-b from-[#6395EE] via-[#5284e7] to-[#3d72d6] dark:from-[#0c1527] dark:via-[#080e1b] dark:to-[#050811] shadow-2xl z-50 flex flex-col h-full">
             {content}
           </div>
         </div>

@@ -60,7 +60,11 @@ export default function IzinSiswaForm({
     setLoading(true);
     try {
       const res = await submitPtspForm('izin-siswa', formData);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: `${formData.nama} (${formData.kelas})`,
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan izin siswa.');
     } finally {

@@ -31,8 +31,9 @@ export default function Header({
 
         {/* Title and Tagline */}
         <div className="min-w-0">
-          <h2 className="text-xs sm:text-base font-black text-slate-800 dark:text-slate-100 leading-tight truncate">
-            Pelayanan Terpadu Satu Pintu
+          <h2 className="text-xs sm:text-base font-black text-slate-800 dark:text-slate-100 leading-tight">
+            <span className="block sm:inline">Pelayanan Terpadu</span>{' '}
+            <span className="block sm:inline">Satu Pintu</span>
           </h2>
           <p className="hidden sm:block text-[10.5px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5 line-clamp-1">
             Pelayanan Cepat, Transparan, dan Akuntabel

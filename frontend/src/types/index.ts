@@ -27,6 +27,8 @@ export interface SubmissionResponse {
   service_type: string;
   created_at: string;
   message: string;
+  applicant_name?: string;
+  applicant_phone?: string;
 }
 
 export interface TimelineStep {

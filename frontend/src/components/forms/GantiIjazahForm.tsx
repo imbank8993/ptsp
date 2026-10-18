@@ -72,7 +72,11 @@ export default function GantiIjazahForm({
     setLoading(true);
     try {
       const res = await submitPtspForm('pengganti-ijazah', formData);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: formData.nama_siswa,
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan.');
     } finally {

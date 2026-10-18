@@ -55,16 +55,16 @@ export default function TrackerView({ initialToken = '' }: TrackerViewProps) {
     <div className="w-full max-w-4xl mx-auto space-y-6">
       {/* Search Card */}
       <div className="bg-white dark:bg-[#121d33] rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80 dark:border-[#1e3052] transition-colors duration-200">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-[#6395EE] dark:text-[#7baaf5] flex items-center justify-center border border-blue-100 dark:border-blue-900/50 shadow-sm">
-            <QrCode className="w-6 h-6 stroke-[2]" />
+        <div className="flex items-center gap-2.5 sm:gap-3 mb-4">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-[#6395EE] dark:text-[#7baaf5] flex items-center justify-center border border-blue-100 dark:border-blue-900/50 shadow-sm shrink-0">
+            <QrCode className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />
           </div>
           <div>
-            <h2 className="text-xl font-black text-slate-800 dark:text-slate-100">
+            <h2 className="text-sm sm:text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug">
               Lacak Status Permohonan
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Pantau progres permohonan PTSP menggunakan Kode Lacak (Short Code) atau Token UUID.
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Ketik token permohonan lalu klik search untuk melihat progres pengajuan
             </p>
           </div>
         </div>

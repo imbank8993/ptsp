@@ -73,7 +73,11 @@ export default function MutasiSiswaForm({
     setLoading(true);
     try {
       const res = await submitPtspForm('mutasi-siswa', formData);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: `${formData.nama_siswa} (Kelas ${formData.kelas})`,
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan.');
     } finally {

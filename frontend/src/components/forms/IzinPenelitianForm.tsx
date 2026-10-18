@@ -69,7 +69,11 @@ export default function IzinPenelitianForm({
         tanggal_selesai: formData.tanggal_selesai || formData.tanggal_mulai,
       };
       const res = await submitPtspForm('izin-penelitian', payload);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: formData.nama,
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan.');
     } finally {

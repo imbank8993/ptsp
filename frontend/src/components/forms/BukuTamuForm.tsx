@@ -49,7 +49,11 @@ export default function BukuTamuForm({
     setLoading(true);
     try {
       const res = await submitPtspForm('buku-tamu', formData);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: formData.nama,
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal menyimpan catatan buku tamu.');
     } finally {

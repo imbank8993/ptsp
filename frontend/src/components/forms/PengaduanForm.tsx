@@ -55,7 +55,11 @@ export default function PengaduanForm({
         nama: isAnonim ? 'Anonim' : formData.nama || 'Anonim',
       };
       const res = await submitPtspForm('pengaduan', payload);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: isAnonim ? 'Anonim (Dirahasiakan)' : (formData.nama || 'Masyarakat'),
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim laporan pengaduan.');
     } finally {

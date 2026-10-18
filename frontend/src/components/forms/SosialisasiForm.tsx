@@ -86,7 +86,11 @@ export default function SosialisasiForm({ onSuccess, onProgressChange }: Sosiali
       };
 
       const res = await submitPtspForm('sosialisasi', payload);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: `${formData.nama} (${formData.instansi})`,
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan.');
     } finally {

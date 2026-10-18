@@ -66,7 +66,11 @@ export default function IzinMagangForm({
     setLoading(true);
     try {
       const res = await submitPtspForm('izin-magang', formData);
-      onSuccess(res);
+      onSuccess({
+        ...res,
+        applicant_name: formData.nama,
+        applicant_phone: formData.wa,
+      });
     } catch (err: any) {
       setError(err.message || 'Gagal mengirim permohonan.');
     } finally {
