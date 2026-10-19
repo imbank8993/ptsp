@@ -171,6 +171,11 @@ export default function PeminjamanSaranaForm({
             required
             value={formData.rencana_jam}
             onChange={(e) => handleChange('rencana_jam', e.target.value)}
+            onClick={(e) => {
+              try {
+                (e.target as HTMLInputElement).showPicker?.();
+              } catch {}
+            }}
             className="ptsp-input cursor-pointer"
           />
         </div>

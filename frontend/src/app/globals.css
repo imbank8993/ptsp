@@ -216,9 +216,37 @@ input, button, select, textarea {
   color: #f1f5f9;
 }
 
-.dark input::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+/* Dark mode time & date inputs: clock and calendar icons forced pure white */
+.dark input[type="time"],
+.dark input[type="date"],
+.dark input[type="datetime-local"] {
+  color-scheme: dark !important;
+  color: #f1f5f9 !important;
 }
+
+.dark input[type="time"]::-webkit-datetime-edit,
+.dark input[type="time"]::-webkit-datetime-edit-fields-wrapper,
+.dark input[type="time"]::-webkit-datetime-edit-text,
+.dark input[type="time"]::-webkit-datetime-edit-minute,
+.dark input[type="time"]::-webkit-datetime-edit-hour,
+.dark input[type="time"]::-webkit-datetime-edit-ampm-field {
+  color: #f1f5f9;
+}
+
+.dark input::-webkit-calendar-picker-indicator,
+.dark input::-webkit-time-picker-indicator {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9 !important;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.dark input::-webkit-calendar-picker-indicator:hover,
+.dark input::-webkit-time-picker-indicator:hover {
+  opacity: 1 !important;
+  transform: scale(1.08);
+}
+
 
 .dark .bg-red-50 {
   background-color: rgba(69, 10, 10, 0.35) !important;
