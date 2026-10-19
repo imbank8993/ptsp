@@ -300,59 +300,7 @@ input, button, select, textarea {
   animation: float 4s ease-in-out infinite;
 }
 
-/* Wide, smooth parabolic arrival for the mascot coming from bottom-left */
-@keyframes owl-arrival {
-  0% {
-    transform: translate3d(-108vw, 15vh, 0) rotate(14deg) scale(0.76);
-    opacity: 0;
-  }
-  6% {
-    opacity: 1;
-  }
-  20% {
-    transform: translate3d(-86vw, -2vh, 0) rotate(10deg) scale(0.82);
-  }
-  38% {
-    transform: translate3d(-64vw, -18vh, 0) rotate(5deg) scale(0.88);
-  }
-  54% {
-    transform: translate3d(-46vw, -28vh, 0) rotate(0deg) scale(0.93);
-  }
-  68% {
-    transform: translate3d(-31vw, -26vh, 0) rotate(-4deg) scale(0.96);
-  }
-  82% {
-    transform: translate3d(-17vw, -17vh, 0) rotate(-4deg) scale(0.98);
-  }
-  92% {
-    transform: translate3d(-7vw, -7vh, 0) rotate(-2deg) scale(1);
-  }
-  97% {
-    transform: translate3d(-1.6vw, -1.2vh, 0) rotate(1deg) scale(1);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-owl-arrival {
-  animation: owl-arrival 4.2s cubic-bezier(0.22, 1, 0.36, 1) both;
-  will-change: transform;
-}
-
-
-.owl-flight-body {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: owl-body-bob 520ms ease-in-out infinite alternate;
-}
-
-@keyframes owl-body-bob {
-  from { transform: translateY(1px) rotate(-2deg); }
-  to { transform: translateY(-2px) rotate(2deg); }
-}
-
+/* Settled Owl Mascot Styling (Menetap) */
 .owl-wing {
   transform-box: view-box;
   transform-origin: 50% 64%;
@@ -362,21 +310,6 @@ input, button, select, textarea {
 .owl-wing-right { transform-origin: 70px 64px; }
 .owl-wing-rest.owl-wing-left { transform: translateX(12px) rotate(7deg) scale(.7,.9); }
 .owl-wing-rest.owl-wing-right { transform: translateX(-12px) rotate(-7deg) scale(.7,.9); }
-
-@keyframes owl-wing-flap-left {
-  0%, 100% { transform: rotate(0deg) scaleY(1); }
-  38% { transform: rotate(-62deg) scaleY(.78); }
-  68% { transform: rotate(12deg) scaleY(1.08); }
-}
-
-@keyframes owl-wing-flap-right {
-  0%, 100% { transform: rotate(0deg) scaleY(1); }
-  38% { transform: rotate(62deg) scaleY(.78); }
-  68% { transform: rotate(-12deg) scaleY(1.08); }
-}
-
-.owl-wing-flapping.owl-wing-left { animation: owl-wing-flap-left 430ms cubic-bezier(.45,0,.55,1) infinite; }
-.owl-wing-flapping.owl-wing-right { animation: owl-wing-flap-right 430ms cubic-bezier(.45,0,.55,1) infinite; }
 
 @keyframes owl-eye-blink {
   0%, 95%, 100% { transform: scaleY(1); }
@@ -390,14 +323,12 @@ input, button, select, textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-owl-arrival,
-  .owl-wing-flapping,
-  .owl-flight-body,
   .owl-blink {
     animation-duration: 1ms;
     animation-iteration-count: 1;
   }
 }
+
 
 /* Eye blink animation */
 @keyframes blink {
