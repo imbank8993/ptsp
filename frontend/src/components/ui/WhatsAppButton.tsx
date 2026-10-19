@@ -44,7 +44,7 @@ export default function WhatsAppButton() {
     };
 
     updateDefaultPosition();
-    const flightTimer = window.setTimeout(() => setIsFlyingIn(false), 3800);
+    const flightTimer = window.setTimeout(() => setIsFlyingIn(false), 4250);
     window.addEventListener('resize', updateDefaultPosition);
     return () => {
       window.clearTimeout(flightTimer);
