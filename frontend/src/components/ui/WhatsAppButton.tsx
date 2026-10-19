@@ -12,7 +12,6 @@ export default function WhatsAppButton() {
   // Position state: null initially until mounted to prevent hydration mismatch
   const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   // References for drag calculation
   const dragStartRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
@@ -124,8 +123,6 @@ export default function WhatsAppButton() {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
-      onPointerEnter={() => setIsHovered(true)}
-      onPointerLeave={() => setIsHovered(false)}
       style={{
         transform: position
           ? `translate3d(${position.x}px, ${position.y}px, 0)`
@@ -133,24 +130,21 @@ export default function WhatsAppButton() {
         touchAction: 'none',
         visibility: position ? 'visible' : 'hidden',
       }}
-      className={`fixed top-0 left-0 z-50 w-16 h-16 bg-transparent text-white flex items-center justify-center select-none ${
+      className={`group fixed top-0 left-0 z-50 w-16 h-16 bg-transparent text-white flex items-center justify-center select-none ${
         isDragging
           ? 'cursor-grabbing transition-none'
-          : 'cursor-grab active:opacity-80 transition-opacity duration-200 hover:scale-105'
+          : 'cursor-grab active:opacity-80'
       }`}
-      title="Geser untuk memindahkan, ketuk untuk chat Helpdesk WhatsApp"
       aria-label="Hubungi Helpdesk PTSP via WhatsApp"
     >
       <span
-        className={`absolute right-full mr-2 whitespace-nowrap rounded-lg bg-[var(--ptsp-primary)] px-3 py-1.5 text-xs font-semibold text-white shadow-lg transition-all duration-200 pointer-events-none ${
-          isHovered && !isDragging ? 'translate-x-0 opacity-100' : 'translate-x-1 opacity-0'
-        }`}
+        className="absolute right-full mr-2 whitespace-nowrap rounded-lg bg-[var(--ptsp-primary)] px-3 py-1.5 text-xs font-semibold text-white shadow-lg pointer-events-none opacity-0 translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0"
         aria-hidden="true"
       >
         Hubungi kami
       </span>
       <svg
-        className="w-16 h-16 pointer-events-none drop-shadow-[0_2px_3px_rgba(15,23,42,0.65)]"
+        className="w-16 h-16 pointer-events-none drop-shadow-[0_2px_3px_rgba(15,23,42,0.65)] transition-transform duration-200 ease-out group-hover:scale-110"
         viewBox="0 0 100 110"
         fill="none"
         aria-hidden="true"
@@ -173,10 +167,13 @@ export default function WhatsAppButton() {
           <path d="M29 33 27 20l13 8c6-2 14-2 20 0l13-8-2 13c4 5 6 11 6 19 0 16-11 25-27 25S23 68 23 52c0-8 2-14 6-19Z" fill="white" />
           <path d="M29 33 27 20l13 8c3-1 6-1.5 10-1.5V78c-16 0-27-9-27-26 0-8 2-14 6-19Z" fill="var(--ptsp-primary-light)" stroke="none" />
           <path d="M29 51c0-7 5-12 12-12s12 5 12 12-5 13-12 13-12-6-12-13Zm18 0c0-7 5-12 12-12s12 5 12 12-5 13-12 13-12-6-12-13Z" fill="var(--ptsp-primary)" />
-          <ellipse className={!isDragging ? 'owl-blink' : ''} cx="41" cy="51" rx="5" ry="5" fill="white" />
-          <ellipse className={!isDragging ? 'owl-blink' : ''} cx="59" cy="51" rx="5" ry="5" fill="white" />
-          <circle className={!isDragging ? 'owl-blink' : ''} cx="42" cy="51" r="2" fill="#0f172a" stroke="none" />
-          <circle className={!isDragging ? 'owl-blink' : ''} cx="58" cy="51" r="2" fill="#0f172a" stroke="none" />
+          {/* Synchronized natural eye blink */}
+          <g className={!isDragging ? 'owl-eyes-blink' : ''}>
+            <ellipse cx="41" cy="51" rx="5" ry="5" fill="white" />
+            <ellipse cx="59" cy="51" rx="5" ry="5" fill="white" />
+            <circle cx="42" cy="51" r="2" fill="#0f172a" stroke="none" />
+            <circle cx="58" cy="51" r="2" fill="#0f172a" stroke="none" />
+          </g>
           <path d="m50 55-4 6h8l-4-6Z" fill="#f4b942" />
         </g>
       </svg>

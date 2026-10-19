@@ -312,18 +312,17 @@ input, button, select, textarea {
 .owl-wing-rest.owl-wing-right { transform: translateX(-12px) rotate(-7deg) scale(.7,.9); }
 
 @keyframes owl-eye-blink {
-  0%, 95%, 100% { transform: scaleY(1); }
-  97% { transform: scaleY(0.12); }
+  0%, 93%, 100% { transform: scaleY(1); }
+  95%, 97% { transform: scaleY(0.12); }
 }
 
-.owl-blink {
-  transform-box: fill-box;
-  transform-origin: center;
+.owl-eyes-blink {
+  transform-origin: 50px 51px;
   animation: owl-eye-blink 4.8s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .owl-blink {
+  .owl-eyes-blink {
     animation-duration: 1ms;
     animation-iteration-count: 1;
   }
